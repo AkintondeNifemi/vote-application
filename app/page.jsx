@@ -1,22 +1,20 @@
 import {
   ArrowRight,
-  Check,
   Globe,
-  Lock,
-  Zap,
   Users,
   BarChart3,
   Shield,
-  Sparkles,
   TrendingUp,
   Heart,
 } from "lucide-react";
 import HeroSection from "@/components/landing/hero";
 import Footer from "@/components/landing/footer";
+import FeatureSection from "@/components/landing/features";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 overflow-x-hidden">
+    <div className="min-h-screen bg-linear-to-br from-white via-blue-50/30 to-white dark:from-zinc-900 dark:via-blue-950/20 dark:to-zinc-900  overflow-hidden">
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-size-[24px_24px]"></div>
       <HeroSection />
 
       <main className="mx-auto max-w-7xl px-4 sm:px-6 w-full overflow-x-hidden pt-20">
@@ -47,82 +45,9 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Features Section */}
-        <section id="features" className="py-32">
-          <div className="text-center mb-20">
-            <span className="inline-block text-xs font-bold text-blue-600 dark:text-blue-400 uppercase tracking-widest mb-4">
-              → Features
-            </span>
-            <h2 className="text-5xl sm:text-6xl font-black tracking-tight mb-6 text-zinc-900 dark:text-zinc-100">
-              Everything you need
-            </h2>
-            <p className="text-lg text-zinc-600 dark:text-zinc-300 max-w-2xl mx-auto leading-relaxed">
-              Powerful, intuitive tools built for teams that value clarity and
-              trust in their decision-making process.
-            </p>
-          </div>
+        <FeatureSection />
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[
-              {
-                icon: TrendingUp,
-                title: "Real-time Analytics",
-                description:
-                  "Watch votes update live with beautiful, interactive charts and detailed breakdowns",
-              },
-              {
-                icon: Shield,
-                title: "Bank-level Security",
-                description:
-                  "Enterprise-grade encryption ensures every vote stays private and authentic",
-              },
-              {
-                icon: Users,
-                title: "Easy Collaboration",
-                description:
-                  "Share polls instantly via link, QR code, or email to get responses fast",
-              },
-              {
-                icon: BarChart3,
-                title: "Advanced Insights",
-                description:
-                  "Export detailed reports and understand voting patterns with smart analytics",
-              },
-              {
-                icon: Globe,
-                title: "Mobile First",
-                description:
-                  "Responsive design works perfectly on desktop, tablet, and smartphone",
-              },
-              {
-                icon: Heart,
-                title: "User Friendly",
-                description:
-                  "Intuitive interface that anyone can use with zero learning curve",
-              },
-            ].map((feature, idx) => {
-              const Icon = feature.icon;
-              return (
-                <div
-                  key={idx}
-                  className="rounded-xl border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 p-7 hover:border-blue-300 dark:hover:border-blue-600 hover:shadow-lg transition group"
-                >
-                  <div className="w-11 h-11 rounded-lg bg-blue-100 dark:bg-blue-900/40 flex items-center justify-center mb-4 group-hover:bg-blue-600 transition">
-                    <Icon className="w-5 h-5 text-blue-600 dark:text-blue-300 group-hover:text-white transition" />
-                  </div>
-                  <h3 className="text-lg font-bold mb-2 text-zinc-900 dark:text-zinc-100">
-                    {feature.title}
-                  </h3>
-                  <p className="text-zinc-600 dark:text-zinc-300 leading-relaxed text-sm">
-                    {feature.description}
-                  </p>
-                </div>
-              );
-            })}
-          </div>
-        </section>
-
-        <section className="py-32">
+        <section id="process" className="py-32">
           <div className="text-center mb-20">
             <span className="inline-block text-xs font-bold text-blue-600 dark:text-blue-400 uppercase tracking-widest mb-4">
               → Process
@@ -176,108 +101,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="pricing" className="py-32">
-          <div className="text-center mb-20">
-            <span className="inline-block text-xs font-bold text-blue-600 dark:text-blue-400 uppercase tracking-widest mb-4">
-              → Pricing
-            </span>
-            <h2 className="text-5xl sm:text-6xl font-black tracking-tight mb-6 text-zinc-900 dark:text-zinc-100">
-              Plans for every team
-            </h2>
-            <p className="text-lg text-zinc-600 dark:text-zinc-300">
-              Start free, scale as you grow. No credit card required.
-            </p>
-          </div>
-
-          <div className="grid sm:grid-cols-3 gap-6 max-w-5xl mx-auto">
-            {[
-              {
-                name: "Starter",
-                price: "Free",
-                features: [
-                  "Up to 100 voters",
-                  "Unlimited polls",
-                  "Basic charts",
-                  "Email support",
-                ],
-              },
-              {
-                name: "Professional",
-                price: "$39",
-                period: "/month",
-                features: [
-                  "Up to 10,000 voters",
-                  "Advanced analytics",
-                  "Custom branding",
-                  "Priority support",
-                  "API access",
-                ],
-                popular: true,
-              },
-              {
-                name: "Enterprise",
-                price: "Custom",
-                features: [
-                  "Unlimited voters",
-                  "Custom features",
-                  "Dedicated support",
-                  "SLA guarantee",
-                  "On-premise option",
-                ],
-              },
-            ].map((plan, idx) => (
-              <div
-                key={idx}
-                className={`rounded-xl border p-8 transition ${
-                  plan.popular
-                    ? "border-blue-600 dark:border-blue-600 bg-linear-to-br from-blue-50 dark:from-blue-900/30 to-white dark:to-zinc-800 shadow-2xl scale-105"
-                    : "border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 hover:shadow-lg"
-                }`}
-              >
-                {plan.popular && (
-                  <span className="inline-block bg-blue-600 dark:bg-blue-600 text-white px-3.5 py-1 rounded-full text-xs font-bold mb-4">
-                    Most Popular
-                  </span>
-                )}
-                <h3 className="text-2xl font-bold mb-2 text-zinc-900 dark:text-zinc-100">
-                  {plan.name}
-                </h3>
-                <div className="mb-8">
-                  <span className="text-5xl font-black text-zinc-900 dark:text-zinc-100">
-                    {plan.price}
-                  </span>
-                  {plan.period && (
-                    <span className="text-zinc-600 dark:text-zinc-300 ml-1">
-                      {plan.period}
-                    </span>
-                  )}
-                </div>
-                <ul className="space-y-3 mb-8 border-t border-zinc-200 dark:border-zinc-700 pt-8">
-                  {plan.features.map((feature, fidx) => (
-                    <li
-                      key={fidx}
-                      className="flex items-center gap-3 text-zinc-700 dark:text-zinc-300"
-                    >
-                      <Check className="w-5 h-5 text-blue-600 dark:text-blue-300 shrink-0" />
-                      <span className="text-sm">{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-                <button
-                  className={`w-full rounded-lg py-3 font-semibold transition ${
-                    plan.popular
-                      ? "bg-blue-600 dark:bg-blue-600 text-white hover:bg-blue-700 dark:hover:bg-blue-500"
-                      : "bg-zinc-100 dark:bg-zinc-700 text-zinc-900 dark:text-zinc-100 hover:bg-zinc-200 dark:hover:bg-zinc-600"
-                  }`}
-                >
-                  Get Started
-                </button>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        <section id="faq" className="py-32">
+        <section id="faq" className="py-5">
           <div className="text-center mb-20">
             <span className="inline-block text-xs font-bold text-blue-600 dark:text-blue-400 uppercase tracking-widest mb-4">
               → Support
@@ -316,7 +140,7 @@ export default function Home() {
               >
                 <summary className="flex cursor-pointer items-center justify-between font-semibold text-zinc-900 dark:text-zinc-100">
                   <span className="text-lg">{item.q}</span>
-                  <span className="text-2xl text-blue-600 dark:text-blue-400 group-open:rotate-45 transition shrink-0">
+                  <span className="text-2xl cursor-pointer text-blue-600 dark:text-blue-400 group-open:rotate-45 transition shrink-0">
                     +
                   </span>
                 </summary>

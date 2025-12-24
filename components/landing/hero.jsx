@@ -38,10 +38,10 @@ export default function HeroSection() {
               Features
             </a>
             <a
-              href="#pricing"
+              href="#process"
               className="hover:text-blue-600 dark:hover:text-blue-400 transition"
             >
-              Pricing
+              Process
             </a>
             <a
               href="#faq"

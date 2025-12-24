@@ -8,7 +8,7 @@ import {
 } from "lucide-react";
 export default function FeatureSection() {
   return (
-    <section id="features" className="py-32">
+    <section id="features" className="py-5">
       <div className="text-center mb-20">
         <span className="inline-block text-xs font-bold text-blue-600 dark:text-blue-400 uppercase tracking-widest mb-4">
           → Features

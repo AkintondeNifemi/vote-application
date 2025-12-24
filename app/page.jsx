@@ -17,7 +17,7 @@ export default function Home() {
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-size-[24px_24px]"></div>
       <HeroSection />
 
-      <main className="mx-auto max-w-7xl px-4 sm:px-6 w-full overflow-x-hidden pt-20">
+      <main className="mx-auto max-w-7xl px-4 sm:px-6 w-full overflow-x-hidden pt-5">
         <div className="grid grid-cols-3 gap-8 py-16 border-t border-b border-zinc-200 dark:border-zinc-700">
           <div className="text-center">
             <p className="text-4xl sm:text-5xl font-bold text-blue-600 dark:text-blue-400">
@@ -47,7 +47,7 @@ export default function Home() {
 
         <FeatureSection />
 
-        <section id="process" className="py-32">
+        <section id="process" className="py-5">
           <div className="text-center mb-20">
             <span className="inline-block text-xs font-bold text-blue-600 dark:text-blue-400 uppercase tracking-widest mb-4">
               → Process

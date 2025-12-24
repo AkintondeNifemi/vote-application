@@ -14,7 +14,7 @@ import {
   Heart,
   Sun,
 } from "lucide-react";
-import Toggle from "./components/toggle";
+import Toggle from "../components/toggle";
 
 export default function Home() {
   return (

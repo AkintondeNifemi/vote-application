@@ -69,8 +69,8 @@ export default function HeroSection() {
         </div>
       </nav>
 
-      <section className="relative min-h-screen bg-linear-to-br from-white via-blue-50/30 to-white dark:from-zinc-900 dark:via-blue-950/20 dark:to-zinc-900 pt-32 pb-20 px-4 sm:px-6 overflow-hidden">
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-size-[24px_24px]"></div>
+      <section className="relative min-h-screen bg-linear-to-br from-white via-blue-50/30 to-white dark:from-zinc-900 dark:via-blue-950/20 dark:to-zinc-900 pt-24 sm:pt-28 lg:pt-32 pb-12 sm:pb-16 lg:pb-20 px-4 sm:px-6 overflow-hidden">
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
 
         <div className="absolute top-20 -left-20 w-96 h-96 bg-blue-500/20 dark:bg-blue-500/10 rounded-full blur-3xl animate-pulse"></div>
         <div
@@ -78,104 +78,102 @@ export default function HeroSection() {
           style={{ animationDelay: "1s" }}
         ></div>
 
-        <div className="relative mx-auto max-w-7xl pt-20">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="space-y-8">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-linear-to-r from-blue-50 to-cyan-50 dark:from-blue-950/50 dark:to-cyan-950/50 border border-blue-200/50 dark:border-blue-800/50 backdrop-blur-sm">
-                <Shield className="w-4 h-4 text-blue-600 dark:text-blue-400" />
-                <span className="text-sm font-semibold text-blue-700 dark:text-blue-300">
+        <div className="relative mx-auto max-w-7xl pt-8 sm:pt-12 lg:pt-20">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+            <div className="space-y-6 lg:space-y-8">
+              <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-linear-to-r from-blue-50 to-cyan-50 dark:from-blue-950/50 dark:to-cyan-950/50 border border-blue-200/50 dark:border-blue-800/50 backdrop-blur-sm">
+                <Shield className="w-3.5 sm:w-4 h-3.5 sm:h-4 text-blue-600 dark:text-blue-400" />
+                <span className="text-xs sm:text-sm font-semibold text-blue-700 dark:text-blue-300">
                   Trusted by Fortune 500 companies
                 </span>
               </div>
 
-              <div className="space-y-4">
-                <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black tracking-tight text-zinc-900 dark:text-zinc-100 leading-tight">
+              <div className="space-y-3 sm:space-y-4">
+                <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight text-zinc-900 dark:text-zinc-100 leading-tight">
                   Make Every Voice{" "}
                   <span className="bg-linear-to-r from-blue-600 via-cyan-500 to-blue-600 dark:from-blue-400 dark:via-cyan-300 dark:to-blue-400 bg-clip-text text-transparent">
                     Count
                   </span>
                 </h1>
-                <p className="text-lg sm:text-xl text-zinc-600 dark:text-zinc-300 leading-relaxed max-w-xl">
+                <p className="text-base sm:text-lg lg:text-xl text-zinc-600 dark:text-zinc-300 leading-relaxed max-w-xl">
                   Build consensus with powerful voting tools. Create polls in
                   seconds, get instant results, and make confident decisions
                   together.
                 </p>
               </div>
 
-              <div className="space-y-6">
-                <div className="flex flex-col sm:flex-row gap-4">
-                  <button className="group relative px-8 py-4 bg-linear-to-r from-blue-600 to-cyan-600 dark:from-blue-500 dark:to-cyan-500 text-white rounded-2xl font-bold text-lg shadow-xl shadow-blue-600/30 hover:shadow-2xl hover:shadow-blue-600/50 hover:scale-105 transition-all duration-300 flex items-center justify-center gap-3">
+              <div className="space-y-4 sm:space-y-6">
+                <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+                  <button className="group relative px-6 sm:px-8 py-3 sm:py-4 bg-linear-to-r from-blue-600 to-cyan-600 dark:from-blue-500 dark:to-cyan-500 text-white rounded-xl sm:rounded-2xl font-bold text-base sm:text-lg shadow-xl shadow-blue-600/30 hover:shadow-2xl hover:shadow-blue-600/50 hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2 sm:gap-3">
                     Start Voting Free
                     <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform" />
                   </button>
-                  <button className="group px-8 py-4 bg-white/80 dark:bg-zinc-800/80 backdrop-blur-sm text-zinc-900 dark:text-zinc-100 rounded-2xl font-bold text-lg border-2 border-zinc-200 dark:border-zinc-700 hover:border-blue-600 dark:hover:border-blue-500 hover:scale-105 transition-all duration-300 flex items-center justify-center gap-3">
+                  <button className="group px-6 sm:px-8 py-3 sm:py-4 bg-white/80 dark:bg-zinc-800/80 backdrop-blur-sm text-zinc-900 dark:text-zinc-100 rounded-xl sm:rounded-2xl font-bold text-base sm:text-lg border-2 border-zinc-200 dark:border-zinc-700 hover:border-blue-600 dark:hover:border-blue-500 hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2 sm:gap-3">
                     <Play className="w-5 h-5" />
                     See it in action
                   </button>
                 </div>
 
-                <div className="flex items-center gap-8 pt-4">
-                  <div className="flex items-center gap-2">
-                    <CheckCircle2 className="w-5 h-5 text-green-600 dark:text-green-400" />
-                    <span className="text-sm font-medium text-zinc-700 dark:text-zinc-300">
+                <div className="flex flex-wrap items-center gap-4 sm:gap-6 lg:gap-8 pt-3 sm:pt-4">
+                  <div className="flex items-center gap-1.5 sm:gap-2">
+                    <CheckCircle2 className="w-4 sm:w-5 h-4 sm:h-5 text-green-600 dark:text-green-400 shrink-0" />
+                    <span className="text-xs sm:text-sm font-medium text-zinc-700 dark:text-zinc-300 whitespace-nowrap">
                       Free forever
                     </span>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle2 className="w-5 h-5 text-green-600 dark:text-green-400" />
-                    <span className="text-sm font-medium text-zinc-700 dark:text-zinc-300">
+                  <div className="flex items-center gap-1.5 sm:gap-2">
+                    <CheckCircle2 className="w-4 sm:w-5 h-4 sm:h-5 text-green-600 dark:text-green-400 shrink-0" />
+                    <span className="text-xs sm:text-sm font-medium text-zinc-700 dark:text-zinc-300 whitespace-nowrap">
                       No credit card
                     </span>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle2 className="w-5 h-5 text-green-600 dark:text-green-400" />
-                    <span className="text-sm font-medium text-zinc-700 dark:text-zinc-300">
+                  <div className="flex items-center gap-1.5 sm:gap-2">
+                    <CheckCircle2 className="w-4 sm:w-5 h-4 sm:h-5 text-green-600 dark:text-green-400 shrink-0" />
+                    <span className="text-xs sm:text-sm font-medium text-zinc-700 dark:text-zinc-300 whitespace-nowrap">
                       2-min setup
                     </span>
                   </div>
                 </div>
               </div>
 
-              <div className="flex items-center gap-6 pt-6 border-t border-zinc-200 dark:border-zinc-800">
-                <div>
-                  <div className="text-3xl font-black text-zinc-900 dark:text-zinc-100">
+              <div className="grid grid-cols-3 gap-4 sm:gap-6 pt-4 sm:pt-6 border-t border-zinc-200 dark:border-zinc-800">
+                <div className="text-center sm:text-left">
+                  <div className="text-2xl sm:text-3xl font-black text-zinc-900 dark:text-zinc-100">
                     100k+
                   </div>
-                  <div className="text-sm text-zinc-600 dark:text-zinc-400">
+                  <div className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400">
                     Active Users
                   </div>
                 </div>
-                <div className="w-px h-12 bg-zinc-200 dark:bg-zinc-800"></div>
-                <div>
-                  <div className="text-3xl font-black text-zinc-900 dark:text-zinc-100">
+                <div className="text-center sm:text-left border-l border-zinc-200 dark:border-zinc-800 pl-4 sm:pl-6">
+                  <div className="text-2xl sm:text-3xl font-black text-zinc-900 dark:text-zinc-100">
                     5M+
                   </div>
-                  <div className="text-sm text-zinc-600 dark:text-zinc-400">
+                  <div className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400">
                     Votes Cast
                   </div>
                 </div>
-                <div className="w-px h-12 bg-zinc-200 dark:bg-zinc-800"></div>
-                <div>
-                  <div className="text-3xl font-black text-zinc-900 dark:text-zinc-100">
+                <div className="text-center sm:text-left border-l border-zinc-200 dark:border-zinc-800 pl-4 sm:pl-6">
+                  <div className="text-2xl sm:text-3xl font-black text-zinc-900 dark:text-zinc-100">
                     99.9%
                   </div>
-                  <div className="text-sm text-zinc-600 dark:text-zinc-400">
+                  <div className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400">
                     Uptime
                   </div>
                 </div>
               </div>
             </div>
 
-            <div className="relative lg:h-150 flex items-center justify-center">
-              <div className="relative w-full max-w-md">
-                <div className="relative bg-white/90 dark:bg-zinc-800/90 backdrop-blur-xl rounded-3xl shadow-2xl border border-zinc-200 dark:border-zinc-700 p-8 hover:scale-105 transition-transform duration-500">
-                  <div className="space-y-6">
+            <div className="relative mt-12 lg:mt-0 lg:h-[600px] flex items-center justify-center">
+              <div className="relative w-full max-w-md mx-auto">
+                <div className="relative bg-white/90 dark:bg-zinc-800/90 backdrop-blur-xl rounded-2xl sm:rounded-3xl shadow-2xl border border-zinc-200 dark:border-zinc-700 p-6 sm:p-8 hover:scale-105 transition-transform duration-500">
+                  <div className="space-y-4 sm:space-y-6">
                     <div className="flex items-start justify-between">
                       <div>
-                        <h3 className="text-xl font-bold text-zinc-900 dark:text-zinc-100">
+                        <h3 className="text-lg sm:text-xl font-bold text-zinc-900 dark:text-zinc-100">
                           Team Lunch Choice
                         </h3>
-                        <p className="text-sm text-zinc-500 dark:text-zinc-400 mt-1">
+                        <p className="text-xs sm:text-sm text-zinc-500 dark:text-zinc-400 mt-1">
                           8 votes • Live results
                         </p>
                       </div>
@@ -207,14 +205,14 @@ export default function HeroSection() {
                       ))}
                     </div>
 
-                    <button className="w-full py-3 bg-linear-to-r from-blue-600 to-cyan-600 text-white rounded-xl font-semibold hover:shadow-lg transition-all">
+                    <button className="w-full py-2.5 sm:py-3 text-sm sm:text-base bg-linear-to-r from-blue-600 to-cyan-600 text-white rounded-lg sm:rounded-xl font-semibold hover:shadow-lg transition-all">
                       Cast Your Vote
                     </button>
                   </div>
                 </div>
 
                 <div
-                  className="absolute -top-6 -left-6 bg-white dark:bg-zinc-800 rounded-2xl shadow-xl border border-zinc-200 dark:border-zinc-700 p-4 animate-bounce"
+                  className="hidden sm:block absolute -top-6 -left-6 bg-white dark:bg-zinc-800 rounded-2xl shadow-xl border border-zinc-200 dark:border-zinc-700 p-4 animate-bounce"
                   style={{ animationDuration: "3s" }}
                 >
                   <div className="flex items-center gap-3">
@@ -233,7 +231,7 @@ export default function HeroSection() {
                 </div>
 
                 <div
-                  className="absolute -bottom-6 -right-6 bg-white dark:bg-zinc-800 rounded-2xl shadow-xl border border-zinc-200 dark:border-zinc-700 p-4 animate-bounce"
+                  className="hidden sm:block absolute -bottom-6 -right-6 bg-white dark:bg-zinc-800 rounded-2xl shadow-xl border border-zinc-200 dark:border-zinc-700 p-4 animate-bounce"
                   style={{ animationDuration: "3s", animationDelay: "1s" }}
                 >
                   <div className="flex items-center gap-3">

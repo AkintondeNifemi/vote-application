@@ -1,12 +1,4 @@
-import {
-  ArrowRight,
-  Globe,
-  Users,
-  BarChart3,
-  Shield,
-  TrendingUp,
-  Heart,
-} from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import FeatureSection from "@/components/landing/features";
 
 export default function Home() {

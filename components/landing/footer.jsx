@@ -136,7 +136,8 @@ export default function Footer() {
         </div>
         <div className="border-t border-zinc-200 dark:border-zinc-700 pt-8">
           <p className="text-sm text-zinc-600 dark:text-zinc-300 text-center">
-            &copy; 2025 Votely. All rights reserved. Made with precision.
+            &copy; {new Date().getFullYear()} Votely. All rights reserved. Made
+            with precision.
           </p>
         </div>
       </div>

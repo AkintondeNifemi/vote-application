@@ -1,24 +1,36 @@
 import { BarChart3, Settings, LogOut } from "lucide-react";
 import { LayoutDashboard, FileText, PlusCircle } from "lucide-react";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 export default function SideBar({ sidebarOpen, sidebarCollapsed }) {
   const pathname = usePathname();
-  console.log(pathname);
 
   const menuItems = [
     {
       icon: LayoutDashboard,
       label: "Dashboard",
       active: pathname.includes("dashboard"),
+      href: "/dashboard",
     },
-    { icon: FileText, label: "My Polls", active: pathname.includes("mypolls") },
+    {
+      icon: FileText,
+      label: "My Polls",
+      active: pathname.includes("mypolls"),
+      href: "/dashboard/mypolls",
+    },
     {
       icon: PlusCircle,
       label: "Create Poll",
       active: pathname.includes("createpoll"),
+      href: "/dashboard/createpoll",
     },
-    { icon: BarChart3, label: "Results", active: pathname.includes("results") },
+    {
+      icon: BarChart3,
+      label: "Results",
+      active: pathname.includes("results"),
+      href: "/dashboard/results",
+    },
   ];
   return (
     <aside
@@ -51,9 +63,10 @@ export default function SideBar({ sidebarOpen, sidebarCollapsed }) {
             Overview
           </div>
           {menuItems.map((item, index) => (
-            <button
+            <Link
               key={index}
-              className={`flex w-full items-center gap-3 rounded-lg px-4 py-3 text-sm font-medium transition-colors ${
+              href={item?.href}
+              className={`flex w-full cursor-pointer items-center gap-3 rounded-lg px-4 py-3 text-sm font-medium transition-colors ${
                 item.active
                   ? "bg-indigo-50 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400"
                   : "text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700"
@@ -64,7 +77,7 @@ export default function SideBar({ sidebarOpen, sidebarCollapsed }) {
               <span className={sidebarCollapsed ? "lg:hidden" : ""}>
                 {item.label}
               </span>
-            </button>
+            </Link>
           ))}
         </nav>
 

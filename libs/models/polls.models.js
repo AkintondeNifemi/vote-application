@@ -7,6 +7,30 @@ const pollsModels = new Schema(
       ref: "User",
       required: true,
     },
+    title: {
+      type: String,
+      required: true,
+      minLength: 5,
+    },
+    description: {
+      type: String,
+      required: true,
+      minLength: 10,
+    },
+    startDate: {
+      type: Date,
+      required: true,
+      default: Date.now,
+    },
+    status: {
+      type: String,
+      enum: ["Active", "Closed"],
+      default: "Active",
+    },
+    endTime: {
+      type: Date,
+      required: true,
+    },
   },
   {
     timestamps: true,

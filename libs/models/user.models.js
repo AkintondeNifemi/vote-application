@@ -19,6 +19,17 @@ const userSchema = new Schema(
       required: true,
       unique: true,
     },
+    matricNumber: {
+      type: String,
+      unique: true,
+      default: null,
+    },
+    departement: {
+      type: String,
+    },
+    faculty: {
+      type: String,
+    },
   },
   {
     timestamps: true,

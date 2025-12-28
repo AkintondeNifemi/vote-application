@@ -90,7 +90,8 @@ export default function SideBar({ sidebarOpen, sidebarCollapsed }) {
           >
             Settings
           </div>
-          <button
+          <Link
+            href="/settings"
             className={`flex w-full items-center gap-3 rounded-lg px-4 py-3 text-sm font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 ${
               sidebarCollapsed ? "lg:justify-center" : ""
             }`}
@@ -98,7 +99,7 @@ export default function SideBar({ sidebarOpen, sidebarCollapsed }) {
           >
             <Settings className="h-5 w-5 shrink-0" />
             <span className={sidebarCollapsed ? "lg:hidden" : ""}>Setting</span>
-          </button>
+          </Link>
           <button
             className={`flex w-full items-center gap-3 rounded-lg px-4 py-3 text-sm font-medium text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 ${
               sidebarCollapsed ? "lg:justify-center" : ""
@@ -109,8 +110,6 @@ export default function SideBar({ sidebarOpen, sidebarCollapsed }) {
             <span className={sidebarCollapsed ? "lg:hidden" : ""}>Logout</span>
           </button>
         </div>
-
-        {/* Collapse Toggle Button - Desktop Only */}
       </div>
     </aside>
   );

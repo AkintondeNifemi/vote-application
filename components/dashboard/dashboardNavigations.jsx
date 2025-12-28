@@ -8,9 +8,6 @@ import SideBar from "@/components/dashboard/sideBar";
 export default function DashboardNavigations({ children, session }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
-  const displayName = session?.user?.name ?? "Guest";
-  const displayEmail = session?.user?.email ?? "guest@example.com";
-  const initial = (displayName?.[0] ?? "G").toUpperCase();
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       <SideBar sidebarOpen={sidebarOpen} sidebarCollapsed={sidebarCollapsed} />

@@ -1,9 +1,13 @@
+import { auth } from "@/auth";
 import DashboardNavigations from "@/components/dashboard/dashboardNavigations";
 
-export default function Layout({ children }) {
+export default async function Layout({ children }) {
+  const session = await auth();
+  console.log(session);
+
   return (
     <>
-      <DashboardNavigations> {children} </DashboardNavigations>
+      <DashboardNavigations session={session}>{children} </DashboardNavigations>
     </>
   );
 }

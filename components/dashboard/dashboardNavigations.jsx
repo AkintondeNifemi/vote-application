@@ -4,9 +4,12 @@ import { useState } from "react";
 import { Bell, Mail, Menu, X, ChevronLeft, ChevronRight } from "lucide-react";
 import Toggle from "@/components/toggle";
 import SideBar from "@/components/dashboard/sideBar";
-export default function DashboardNavigations({ children }) {
+export default function DashboardNavigations({ children, session }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  const displayName = session?.user?.name ?? "Guest";
+  const displayEmail = session?.user?.email ?? "guest@example.com";
+  const initial = (displayName?.[0] ?? "G").toUpperCase();
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       <SideBar sidebarOpen={sidebarOpen} sidebarCollapsed={sidebarCollapsed} />
@@ -56,17 +59,27 @@ export default function DashboardNavigations({ children }) {
               <Toggle />
 
               <button className="relative rounded-lg p-2 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
-                <Mail className="h-5 w-5" />
-              </button>
-              <button className="relative rounded-lg p-2 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
                 <Bell className="h-5 w-5" />
                 <span className="absolute right-1.5 top-1.5 h-2 w-2 rounded-full bg-red-500"></span>
               </button>
 
-              <div className="flex items-center gap-3 rounded-lg border border-gray-200 dark:border-gray-600 py-1.5 pl-1.5 pr-3 hover:bg-gray-50 dark:hover:bg-gray-700">
-                <div className="h-8 w-8 rounded-full bg-linear-to-br from-indigo-500 to-purple-600"></div>
-                <span className="hidden text-sm font-medium text-gray-700 dark:text-gray-200 sm:block">
-                  Jason Ranti
+              <div
+                className="flex max-w-[180px] items-center gap-3 rounded-lg border border-gray-200 dark:border-gray-600 py-1.5 pl-1.5 pr-2 hover:bg-gray-50 dark:hover:bg-gray-700"
+                title={`${displayName} • ${displayEmail}`}
+              >
+                {session?.user?.image ? (
+                  <img
+                    className="h-8 w-8 rounded-full"
+                    src={session?.user?.image}
+                    alt={displayName}
+                  />
+                ) : (
+                  <div className="grid h-8 w-8 place-items-center rounded-full bg-gradient-to-br from-indigo-500 to-cyan-500 text-xs font-semibold text-white">
+                    {initial}
+                  </div>
+                )}
+                <span className="truncate text-[12px] font-medium text-gray-700 dark:text-gray-200 capitalize">
+                  {displayName}
                 </span>
               </div>
             </div>

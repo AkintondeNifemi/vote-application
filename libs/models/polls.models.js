@@ -20,14 +20,13 @@ const pollsModels = new Schema(
     startDate: {
       type: Date,
       required: true,
-      default: Date.now,
     },
     status: {
       type: String,
       enum: ["Active", "Closed"],
       default: "Active",
     },
-    endTime: {
+    endDate: {
       type: Date,
       required: true,
     },
@@ -46,6 +45,18 @@ const pollsModels = new Schema(
     },
     voters: {
       type: [Schema.Types.ObjectId],
+      ref: "User",
+      default: [],
+    },
+    candidates: {
+      type: [Schema.Types.ObjectId],
+      ref: "Candidates",
+      default: [],
+    },
+    completedVoters: {
+      type: [Schema.Types.ObjectId],
+      default: [],
+      ref: "User",
     },
   },
   {

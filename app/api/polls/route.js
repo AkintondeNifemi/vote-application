@@ -154,7 +154,7 @@ export async function POST(req) {
         departmentCodes: departmentalCodeArray,
       },
       voters: [userId],
-      role: [{ role: "Owner", userId: userId }],
+      role: [{ userRole: "Owner", userId: userId }],
     });
     return NextResponse.json(
       { message: "Successfully created", poll: poll },

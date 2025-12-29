@@ -1,5 +1,5 @@
 import CreatePollForm from "@/components/dashboard/polls/create/form";
-import { Plus, Calendar, FileText, Settings } from "lucide-react";
+import { Plus } from "lucide-react";
 
 export default function CreatePollPage() {
   return (

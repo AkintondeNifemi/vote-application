@@ -14,17 +14,18 @@ export default function SideBar({ sidebarOpen, sidebarCollapsed }) {
       href: "/dashboard",
     },
     {
-      icon: FileText,
-      label: "My Polls",
-      active: pathname.includes("polls"),
-      href: "/polls",
-    },
-    {
       icon: PlusCircle,
       label: "Create Poll",
-      active: pathname.includes("createpoll"),
+      active: pathname.includes("/polls/create"),
       href: "/polls/create",
     },
+    {
+      icon: FileText,
+      label: "My Polls",
+      active: pathname.includes("polls") && !pathname.includes("create"),
+      href: "/polls",
+    },
+
     {
       icon: BarChart3,
       label: "Results",

@@ -40,7 +40,7 @@ export default function PollsPage() {
   ];
 
   return (
-    <main className="min-h-screen bg-white dark:bg-slate-950 px-6 py-8 transition-colors">
+    <main className="min-h-screen  px-6 py-8 transition-colors">
       <div className="max-w-6xl mx-auto">
         <header className="mb-10">
           <h1 className="text-4xl font-bold text-gray-900 dark:text-white">

@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
 export default function InvitationDetails({ pollData }) {
@@ -25,7 +26,7 @@ export default function InvitationDetails({ pollData }) {
           Who Can Vote
         </p>
         <div className="space-y-3">
-          {pollData.rules.emailPrefix && (
+          {pollData.rule.emailPrefix && (
             <div className="flex items-start gap-3">
               <div className="h-5 w-5 rounded-full bg-purple-600 dark:bg-purple-500 text-white flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">
                 ✓
@@ -35,12 +36,12 @@ export default function InvitationDetails({ pollData }) {
                   Email Domain Required
                 </p>
                 <p className="text-xs text-gray-600 dark:text-slate-400">
-                  Must have a {pollData.rules.emailPrefix} email address
+                  Must have a {pollData.rule.emailPrefix} email address
                 </p>
               </div>
             </div>
           )}
-          {pollData.rules.departmentCodes.length > 0 && (
+          {pollData.rule.departmentCodes.length > 0 && (
             <div className="flex items-start gap-3">
               <div className="h-5 w-5 rounded-full bg-purple-600 dark:bg-purple-500 text-white flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">
                 ✓
@@ -53,7 +54,7 @@ export default function InvitationDetails({ pollData }) {
                   Must be part of one of these departments:
                 </p>
                 <div className="flex flex-wrap gap-2">
-                  {pollData.rules.departmentCodes.map((dept) => (
+                  {pollData.rule.departmentCodes.map((dept) => (
                     <span
                       key={dept}
                       className="inline-block px-2.5 py-1 bg-purple-200 dark:bg-purple-800/50 text-purple-900 dark:text-purple-300 text-xs font-semibold rounded-full uppercase"
@@ -109,18 +110,21 @@ export default function InvitationDetails({ pollData }) {
       {/* From Section */}
       <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800/50 rounded-xl p-5 mb-10">
         <p className="text-xs font-bold text-blue-900 dark:text-blue-300 uppercase tracking-wider mb-3">
-          Sent by
+          Created By
         </p>
         <div className="flex items-center gap-3">
-          <div className="h-10 w-10 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center text-white font-bold text-sm flex-shrink-0">
-            {pollData.createdBy.avatar}
-          </div>
+          <img
+            src={pollData.userId.image}
+            alt={pollData.userId.name}
+            className="h-10 w-10 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center text-white font-bold text-sm flex-shrink-0"
+          />
+
           <div>
             <p className="font-semibold text-gray-900 dark:text-white text-sm">
-              {pollData.createdBy.name}
+              {pollData.userId.name}
             </p>
             <p className="text-xs text-gray-600 dark:text-slate-400">
-              {pollData.createdBy.email}
+              {pollData.userId.email}
             </p>
           </div>
         </div>

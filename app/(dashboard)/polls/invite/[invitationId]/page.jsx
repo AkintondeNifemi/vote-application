@@ -29,13 +29,13 @@ export default async function Page({ params }) {
             <div className="h-2 bg-gradient-to-r from-blue-600 via-blue-500 to-purple-600"></div>
 
             {/* Header Content */}
-            <InvitationHeader pollData={pollData} />
+            <InvitationHeader pollData={response?.poll} />
 
             {/* Invitation Details */}
-            <InvitationDetails pollData={pollData} />
+            <InvitationDetails pollData={response?.poll} />
 
             {/* Footer */}
-            <InvitationFooter pollData={pollData} />
+            <InvitationFooter pollData={response?.poll} />
           </div>
 
           {/* Floating Info Box */}

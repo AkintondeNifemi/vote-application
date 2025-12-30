@@ -30,8 +30,14 @@ export async function PUT(req, { params }) {
       }
     );
   }
-try{}catch(err){
-      console.log(err);
-      return NextResponse.json({error:""});
-}
+  try {
+  } catch (err) {
+    console.log(err);
+    return NextResponse.json(
+      { error: "An error occurred while adding user" },
+      {
+        status: 400,
+      }
+    );
+  }
 }

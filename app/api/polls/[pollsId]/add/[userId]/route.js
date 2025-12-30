@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { connectDatabase } from "@/libs/connectdatabase";
 import User from "@/libs/models/user.models";
+import Polls from "@/libs/models/polls.models";
 
 export async function PUT(req, { params }) {
   const { userId: authorizationUserId } = await req.json();
@@ -56,10 +57,55 @@ export async function PUT(req, { params }) {
       );
     }
     // check if the user has access to the poll
-      const authorizationUserVoteInfo = authorizationUser.voteInformation
-      // return successfully added user
+    const authorizationUserVoteInfo = authorizationUser?.voteInformation.find(
+      (info) => {
+        return info.pollId.toString() === pollsId.toString();
+      }
+    );
+
+    if (!authorizationUserVoteInfo) {
+      return NextResponse.json(
+        { error: "User doesnt have access to this poll" },
+        {
+          status: 400,
+        }
+      );
+    }
+
+    if (authorizationUserVoteInfo?.role !== "Owner") {
+      return NextResponse.json(
+        { error: "You don't have permission to add users to this poll" },
+        {
+          status: 403,
+        }
+      );
+    }
+
+    // check if the poll exist
+    const poll = await Polls.findById(pollsId);
+    if (!poll) {
+      return NextResponse.json(
+        { error: "Poll doesnt exist" },
+        {
+          status: 400,
+        }
+      );
+    }
+    // check if the user I want to belong to the voters already
+    if (poll?.voters.includes(userId)) {
+      return NextResponse.json(
+        { error: "User is already a voter" },
+        {
+          status: 403,
+        }
+      );
+    }
+    //add the user to the voters
+    poll?.voters?.push(userId);
+    await poll.save();
+    // return successfully added user
     return NextResponse.json(
-      { message: "Add a new user", authorizationUserVoteInfo },
+      { message: "Add a new user", voter: poll?.voters },
       {
         status: 200,
       }

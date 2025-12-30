@@ -90,9 +90,19 @@ export async function PUT(req, { params }) {
         );
       }
     }
+    // add the user to the list of voters
+    poll.voters.push(userId);
+    await poll.save();
+    // add the the poll to the list of the user poll
+    user.voteInformation = { pollId: pollsId, role: "Voters" };
+    await user.save();
     //return a success message
     return NextResponse.json(
-      { message: "Successfully updated poll", userId, pollsId },
+      {
+        message: "Successfully joined poll",
+        voters: poll.voters,
+        userVoteInformation: user.voteInformation,
+      },
       {
         status: 200,
       }

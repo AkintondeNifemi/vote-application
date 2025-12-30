@@ -39,7 +39,8 @@ const userSchema = new Schema(
           ref: "Polls",
         },
         role: {
-          type: ["Voters", "Candidate"],
+          type: String,
+          enum: ["Voters", "Candidate", " Admin", "Owner"],
           default: "Voters",
         },
       },

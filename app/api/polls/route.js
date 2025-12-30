@@ -174,6 +174,8 @@ export const POST = auth(async function POST(req) {
       voters: [userId],
       role: [{ userRole: "Owner", userId: userId }],
     });
+    user.voteInformation = { pollId: poll._id, role: "Owner" };
+    await user.save();
     return NextResponse.json(
       { message: "Successfully created", poll: poll },
       {

@@ -88,7 +88,7 @@ export default function VotingPage({ params }) {
 
   if (voted) {
     return (
-      <main className="min-h-screen bg-gradient-to-br from-green-50 via-white to-blue-50 dark:from-slate-950 dark:via-slate-900 dark:to-slate-900 transition-colors flex items-center justify-center px-4 py-8">
+      <main className="min-h-screen bg-linear-to-br from-green-50 via-white to-blue-50 dark:from-slate-950 dark:via-slate-900 dark:to-slate-900 transition-colors flex items-center justify-center px-4 py-8">
         <div className="w-full max-w-lg">
           <div className="bg-white dark:bg-slate-800 rounded-3xl shadow-2xl overflow-hidden border border-gray-100 dark:border-slate-700 text-center p-12">
             <div className="flex justify-center mb-6">
@@ -177,7 +177,7 @@ export default function VotingPage({ params }) {
       {/* Notice */}
       <div className="max-w-5xl mx-auto px-6 py-6">
         <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800/50 rounded-xl p-4 flex items-start gap-3">
-          <Info className="h-5 w-5 text-blue-600 dark:text-blue-400 flex-shrink-0 mt-0.5" />
+          <Info className="h-5 w-5 text-blue-600 dark:text-blue-400 shrink-0 mt-0.5" />
           <div>
             <p className="text-sm font-semibold text-blue-900 dark:text-blue-300 mb-1">
               Confidential Voting
@@ -211,7 +211,7 @@ export default function VotingPage({ params }) {
               <div className="p-6 sm:p-8">
                 <div className="flex items-start gap-6">
                   {/* Avatar */}
-                  <div className="h-16 w-16 sm:h-20 sm:w-20 rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white font-bold text-xl sm:text-2xl flex-shrink-0">
+                  <div className="h-16 w-16 sm:h-20 sm:w-20 rounded-xl bg-linear-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white font-bold text-xl sm:text-2xl shrink-0">
                     {candidate.name
                       .split(" ")
                       .map((n) => n[0])
@@ -230,7 +230,7 @@ export default function VotingPage({ params }) {
                         </p>
                       </div>
                       {selectedCandidate === candidate.id && (
-                        <div className="h-8 w-8 rounded-full bg-blue-600 flex items-center justify-center flex-shrink-0">
+                        <div className="h-8 w-8 rounded-full bg-blue-600 flex items-center justify-center shrink-0">
                           <CheckCircle className="h-5 w-5 text-white" />
                         </div>
                       )}
@@ -291,7 +291,7 @@ export default function VotingPage({ params }) {
             disabled={!selectedCandidate}
             className={`px-8 py-4 rounded-xl font-bold text-lg transition-all duration-200 flex items-center gap-3 ${
               selectedCandidate
-                ? "bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white shadow-lg hover:shadow-xl"
+                ? "bg-linear-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white shadow-lg hover:shadow-xl"
                 : "bg-gray-200 dark:bg-slate-700 text-gray-400 dark:text-slate-500 cursor-not-allowed"
             }`}
           >
@@ -342,7 +342,7 @@ export default function VotingPage({ params }) {
               </button>
               <button
                 onClick={confirmVote}
-                className="flex-1 px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold rounded-xl transition-colors shadow-lg"
+                className="flex-1 px-6 py-3 bg-linear-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold rounded-xl transition-colors shadow-lg"
               >
                 Confirm Vote
               </button>

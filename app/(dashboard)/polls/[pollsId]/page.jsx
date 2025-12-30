@@ -129,9 +129,9 @@ export default function PollDetailsPage({ params }) {
   return (
     <main className="min-h-screen bg-white dark:bg-slate-950 transition-colors">
       {/* Header */}
-      <div className="bg-linear-to-r from-slate-50 to-blue-50 dark:from-slate-900 dark:to-slate-800 border-b border-gray-200 dark:border-slate-700 px-6 py-8">
+      <div className="bg-linear-to-r from-slate-50 to-blue-50 dark:from-slate-900 dark:to-slate-800 border-b border-gray-200 dark:border-slate-700 px-4 sm:px-6 py-6 sm:py-8">
         <div className="max-w-7xl mx-auto">
-          <div className="flex items-start justify-between mb-4">
+          <div className="flex flex-col sm:flex-row items-start justify-between gap-4 mb-4">
             <div>
               <div className="flex items-center gap-3 mb-3">
                 <span
@@ -147,14 +147,14 @@ export default function PollDetailsPage({ params }) {
                   Created {formatDate(pollData.createdAt)}
                 </span>
               </div>
-              <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-2">
+              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mb-2">
                 {pollData.title}
               </h1>
-              <p className="text-gray-600 dark:text-slate-400 text-lg max-w-3xl">
+              <p className="text-gray-600 dark:text-slate-400 text-base sm:text-lg max-w-3xl">
                 {pollData.description}
               </p>
             </div>
-            <button className="px-4 py-2 border border-gray-300 dark:border-slate-600 rounded-lg text-gray-700 dark:text-slate-300 font-medium hover:bg-gray-50 dark:hover:bg-slate-700/50 transition-colors flex items-center gap-2">
+            <button className="px-4 py-2 border border-gray-300 dark:border-slate-600 rounded-lg text-gray-700 dark:text-slate-300 font-medium hover:bg-gray-50 dark:hover:bg-slate-700/50 transition-colors flex items-center gap-2 shrink-0 w-full sm:w-auto justify-center sm:justify-start">
               <MoreVertical className="h-4 w-4" />
               Actions
             </button>
@@ -234,8 +234,8 @@ export default function PollDetailsPage({ params }) {
 
       {/* Tabs */}
       <div className="border-b border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-900">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="flex gap-1 overflow-x-auto">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <div className="flex gap-1 overflow-x-auto scrollbar-hide -mx-4 sm:mx-0 px-4 sm:px-0">
             {tabs.map((tab) => {
               const Icon = tab.icon;
               return (
@@ -258,13 +258,13 @@ export default function PollDetailsPage({ params }) {
       </div>
 
       {/* Content */}
-      <div className="max-w-7xl mx-auto px-6 py-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
         {/* Overview Tab */}
         {activeTab === "overview" && (
           <div className="space-y-6">
             {/* Poll Timeline */}
-            <div className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-200 dark:border-slate-700 p-6">
-              <h2 className="text-lg font-bold text-gray-900 dark:text-white mb-6">
+            <div className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-200 dark:border-slate-700 p-4 sm:p-6">
+              <h2 className="text-base sm:text-lg font-bold text-gray-900 dark:text-white mb-4 sm:mb-6">
                 Poll Timeline
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -288,8 +288,8 @@ export default function PollDetailsPage({ params }) {
             </div>
 
             {/* Voting Rules */}
-            <div className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-200 dark:border-slate-700 p-6">
-              <h2 className="text-lg font-bold text-gray-900 dark:text-white mb-6">
+            <div className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-200 dark:border-slate-700 p-4 sm:p-6">
+              <h2 className="text-base sm:text-lg font-bold text-gray-900 dark:text-white mb-4 sm:mb-6">
                 Voting Rules
               </h2>
               <div className="space-y-4">
@@ -330,8 +330,8 @@ export default function PollDetailsPage({ params }) {
             </div>
 
             {/* Results Preview */}
-            <div className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-200 dark:border-slate-700 p-6">
-              <h2 className="text-lg font-bold text-gray-900 dark:text-white mb-6">
+            <div className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-200 dark:border-slate-700 p-4 sm:p-6">
+              <h2 className="text-base sm:text-lg font-bold text-gray-900 dark:text-white mb-4 sm:mb-6">
                 Current Results
               </h2>
               <div className="space-y-4">
@@ -376,11 +376,11 @@ export default function PollDetailsPage({ params }) {
         {/* Candidates Tab */}
         {activeTab === "candidates" && (
           <div className="space-y-6">
-            <div className="flex items-center justify-between">
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+              <h2 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white">
                 Manage Candidates
               </h2>
-              <button className="px-4 py-2 bg-blue-600 hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-800 text-white font-semibold rounded-lg transition-colors flex items-center gap-2">
+              <button className="px-4 py-2 bg-blue-600 hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-800 text-white font-semibold rounded-lg transition-colors flex items-center gap-2 w-full sm:w-auto justify-center">
                 <Plus className="h-4 w-4" />
                 Add Candidate
               </button>
@@ -390,7 +390,7 @@ export default function PollDetailsPage({ params }) {
               {pollData.candidates.map((candidate) => (
                 <div
                   key={candidate.id}
-                  className="bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-2xl p-6 hover:border-blue-300 dark:hover:border-blue-600 transition-colors"
+                  className="bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-2xl p-4 sm:p-6 hover:border-blue-300 dark:hover:border-blue-600 transition-colors"
                 >
                   <div className="flex items-start justify-between mb-4">
                     <div className="flex items-start gap-4">
@@ -453,99 +453,101 @@ export default function PollDetailsPage({ params }) {
         {/* Voters Tab */}
         {activeTab === "voters" && (
           <div className="space-y-6">
-            <div className="flex items-center justify-between">
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+              <h2 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white">
                 Manage Voters
               </h2>
-              <button className="px-4 py-2 bg-blue-600 hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-800 text-white font-semibold rounded-lg transition-colors flex items-center gap-2">
+              <button className="px-4 py-2 bg-blue-600 hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-800 text-white font-semibold rounded-lg transition-colors flex items-center gap-2 w-full sm:w-auto justify-center">
                 <Plus className="h-4 w-4" />
                 Add Voter
               </button>
             </div>
 
             <div className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-200 dark:border-slate-700 overflow-hidden">
-              <div className="overflow-x-auto">
-                <table className="w-full">
-                  <thead className="bg-gray-50 dark:bg-slate-700/50 border-b border-gray-200 dark:border-slate-700">
-                    <tr>
-                      <th className="px-6 py-3 text-left text-xs font-bold text-gray-600 dark:text-slate-400 uppercase tracking-wider">
-                        Voter
-                      </th>
-                      <th className="px-6 py-3 text-left text-xs font-bold text-gray-600 dark:text-slate-400 uppercase tracking-wider">
-                        Department
-                      </th>
-                      <th className="px-6 py-3 text-left text-xs font-bold text-gray-600 dark:text-slate-400 uppercase tracking-wider">
-                        Status
-                      </th>
-                      <th className="px-6 py-3 text-left text-xs font-bold text-gray-600 dark:text-slate-400 uppercase tracking-wider">
-                        Voted At
-                      </th>
-                      <th className="px-6 py-3 text-right text-xs font-bold text-gray-600 dark:text-slate-400 uppercase tracking-wider">
-                        Actions
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-gray-200 dark:divide-slate-700">
-                    {pollData.voters.map((voter) => (
-                      <tr
-                        key={voter.id}
-                        className="hover:bg-gray-50 dark:hover:bg-slate-700/30 transition-colors"
-                      >
-                        <td className="px-6 py-4 whitespace-nowrap">
-                          <div>
-                            <p className="font-semibold text-gray-900 dark:text-white">
-                              {voter.name}
-                            </p>
-                            <p className="text-sm text-gray-600 dark:text-slate-400">
-                              {voter.email}
-                            </p>
-                          </div>
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
-                          <span className="px-2.5 py-1 bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-400 text-xs font-semibold rounded-full uppercase">
-                            {voter.department}
-                          </span>
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
-                          {voter.blocked ? (
-                            <span className="px-2.5 py-1 bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400 text-xs font-semibold rounded-full flex items-center gap-1 w-fit">
-                              <UserX className="h-3 w-3" />
-                              Blocked
-                            </span>
-                          ) : voter.voted ? (
-                            <span className="px-2.5 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 text-xs font-semibold rounded-full flex items-center gap-1 w-fit">
-                              <CheckCircle className="h-3 w-3" />
-                              Voted
-                            </span>
-                          ) : (
-                            <span className="px-2.5 py-1 bg-gray-100 dark:bg-gray-900/30 text-gray-700 dark:text-gray-400 text-xs font-semibold rounded-full">
-                              Pending
-                            </span>
-                          )}
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600 dark:text-slate-400">
-                          {voter.votedAt ? formatDate(voter.votedAt) : "—"}
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-right">
-                          <div className="flex items-center justify-end gap-2">
-                            {!voter.blocked ? (
-                              <button className="p-2 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors">
-                                <UserX className="h-4 w-4 text-red-600 dark:text-red-400" />
-                              </button>
-                            ) : (
-                              <button className="p-2 hover:bg-green-50 dark:hover:bg-green-900/20 rounded-lg transition-colors">
-                                <UserPlus className="h-4 w-4 text-green-600 dark:text-green-400" />
-                              </button>
-                            )}
-                            <button className="p-2 hover:bg-gray-100 dark:hover:bg-slate-700 rounded-lg transition-colors">
-                              <Trash2 className="h-4 w-4 text-gray-600 dark:text-slate-400" />
-                            </button>
-                          </div>
-                        </td>
+              <div className="overflow-x-auto -mx-4 sm:mx-0">
+                <div className="inline-block min-w-full align-middle">
+                  <table className="w-full">
+                    <thead className="bg-gray-50 dark:bg-slate-700/50 border-b border-gray-200 dark:border-slate-700">
+                      <tr>
+                        <th className="px-6 py-3 text-left text-xs font-bold text-gray-600 dark:text-slate-400 uppercase tracking-wider">
+                          Voter
+                        </th>
+                        <th className="px-6 py-3 text-left text-xs font-bold text-gray-600 dark:text-slate-400 uppercase tracking-wider">
+                          Department
+                        </th>
+                        <th className="px-6 py-3 text-left text-xs font-bold text-gray-600 dark:text-slate-400 uppercase tracking-wider">
+                          Status
+                        </th>
+                        <th className="px-6 py-3 text-left text-xs font-bold text-gray-600 dark:text-slate-400 uppercase tracking-wider">
+                          Voted At
+                        </th>
+                        <th className="px-6 py-3 text-right text-xs font-bold text-gray-600 dark:text-slate-400 uppercase tracking-wider">
+                          Actions
+                        </th>
                       </tr>
-                    ))}
-                  </tbody>
-                </table>
+                    </thead>
+                    <tbody className="divide-y divide-gray-200 dark:divide-slate-700">
+                      {pollData.voters.map((voter) => (
+                        <tr
+                          key={voter.id}
+                          className="hover:bg-gray-50 dark:hover:bg-slate-700/30 transition-colors"
+                        >
+                          <td className="px-6 py-4 whitespace-nowrap">
+                            <div>
+                              <p className="font-semibold text-gray-900 dark:text-white">
+                                {voter.name}
+                              </p>
+                              <p className="text-sm text-gray-600 dark:text-slate-400">
+                                {voter.email}
+                              </p>
+                            </div>
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap">
+                            <span className="px-2.5 py-1 bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-400 text-xs font-semibold rounded-full uppercase">
+                              {voter.department}
+                            </span>
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap">
+                            {voter.blocked ? (
+                              <span className="px-2.5 py-1 bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400 text-xs font-semibold rounded-full flex items-center gap-1 w-fit">
+                                <UserX className="h-3 w-3" />
+                                Blocked
+                              </span>
+                            ) : voter.voted ? (
+                              <span className="px-2.5 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 text-xs font-semibold rounded-full flex items-center gap-1 w-fit">
+                                <CheckCircle className="h-3 w-3" />
+                                Voted
+                              </span>
+                            ) : (
+                              <span className="px-2.5 py-1 bg-gray-100 dark:bg-gray-900/30 text-gray-700 dark:text-gray-400 text-xs font-semibold rounded-full">
+                                Pending
+                              </span>
+                            )}
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600 dark:text-slate-400">
+                            {voter.votedAt ? formatDate(voter.votedAt) : "—"}
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap text-right">
+                            <div className="flex items-center justify-end gap-2">
+                              {!voter.blocked ? (
+                                <button className="p-2 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors">
+                                  <UserX className="h-4 w-4 text-red-600 dark:text-red-400" />
+                                </button>
+                              ) : (
+                                <button className="p-2 hover:bg-green-50 dark:hover:bg-green-900/20 rounded-lg transition-colors">
+                                  <UserPlus className="h-4 w-4 text-green-600 dark:text-green-400" />
+                                </button>
+                              )}
+                              <button className="p-2 hover:bg-gray-100 dark:hover:bg-slate-700 rounded-lg transition-colors">
+                                <Trash2 className="h-4 w-4 text-gray-600 dark:text-slate-400" />
+                              </button>
+                            </div>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
               </div>
             </div>
           </div>
@@ -554,11 +556,11 @@ export default function PollDetailsPage({ params }) {
         {/* Settings Tab */}
         {activeTab === "settings" && (
           <div className="space-y-6">
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
+            <h2 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white">
               Poll Settings
             </h2>
 
-            <div className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-200 dark:border-slate-700 p-6">
+            <div className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-200 dark:border-slate-700 p-4 sm:p-6">
               <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-6">
                 General Settings
               </h3>
@@ -597,7 +599,7 @@ export default function PollDetailsPage({ params }) {
               </div>
             </div>
 
-            <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800/50 rounded-2xl p-6">
+            <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800/50 rounded-2xl p-4 sm:p-6">
               <h3 className="text-lg font-bold text-red-900 dark:text-red-300 mb-2">
                 Danger Zone
               </h3>

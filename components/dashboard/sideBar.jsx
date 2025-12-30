@@ -3,7 +3,11 @@ import { LayoutDashboard, FileText, PlusCircle } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-export default function SideBar({ sidebarOpen, sidebarCollapsed }) {
+export default function SideBar({
+  sidebarOpen,
+  setSidebarOpen,
+  sidebarCollapsed,
+}) {
   const pathname = usePathname();
 
   const menuItems = [
@@ -67,6 +71,9 @@ export default function SideBar({ sidebarOpen, sidebarCollapsed }) {
             <Link
               key={index}
               href={item?.href}
+              onClick={() => {
+                setSidebarOpen(false);
+              }}
               className={`flex w-full cursor-pointer items-center gap-3 rounded-lg px-4 py-3 text-sm font-medium transition-colors ${
                 item.active
                   ? "bg-indigo-50 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400"

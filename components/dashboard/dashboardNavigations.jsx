@@ -10,7 +10,11 @@ export default function DashboardNavigations({ children, session }) {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
-      <SideBar sidebarOpen={sidebarOpen} sidebarCollapsed={sidebarCollapsed} />
+      <SideBar
+        sidebarOpen={sidebarOpen}
+        sidebarCollapsed={sidebarCollapsed}
+        setSidebarOpen={setSidebarOpen}
+      />
       {sidebarOpen && (
         <div
           className="fixed inset-0 z-30 bg-black bg-opacity-50 lg:hidden"

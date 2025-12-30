@@ -1,0 +1,122 @@
+import {
+  Users,
+  UserPlus,
+  MoreVertical,
+  CheckCircle,
+  Clock,
+} from "lucide-react";
+const formatDate = (dateString) => {
+  const date = new Date(dateString);
+  return date.toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+};
+export default function PollsIdHeader({ pollData }) {
+  return (
+    <div className="bg-linear-to-r from-slate-50 to-blue-50 dark:from-slate-900 dark:to-slate-800 border-b border-gray-200 dark:border-slate-700 px-4 sm:px-6 py-6 sm:py-8">
+      <div className="max-w-7xl mx-auto">
+        <div className="flex flex-col sm:flex-row items-start justify-between gap-4 mb-4">
+          <div>
+            <div className="flex items-center gap-3 mb-3">
+              <span
+                className={`inline-block px-3 py-1 rounded-full text-xs font-bold ${
+                  pollData.status === "Active"
+                    ? "bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400"
+                    : "bg-gray-100 dark:bg-gray-900/30 text-gray-700 dark:text-gray-400"
+                }`}
+              >
+                {pollData.status}
+              </span>
+              <span className="text-sm text-gray-600 dark:text-slate-400">
+                Created {formatDate(pollData.createdAt)}
+              </span>
+            </div>
+            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mb-2">
+              {pollData.title}
+            </h1>
+            <p className="text-gray-600 dark:text-slate-400 text-base sm:text-lg max-w-3xl">
+              {pollData.description}
+            </p>
+          </div>
+          <button className="px-4 py-2 border border-gray-300 dark:border-slate-600 rounded-lg text-gray-700 dark:text-slate-300 font-medium hover:bg-gray-50 dark:hover:bg-slate-700/50 transition-colors flex items-center gap-2 shrink-0 w-full sm:w-auto justify-center sm:justify-start">
+            <MoreVertical className="h-4 w-4" />
+            Actions
+          </button>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-6">
+          <div className="bg-white dark:bg-slate-800 rounded-xl p-4 border border-gray-200 dark:border-slate-700">
+            <div className="flex items-center gap-3">
+              <div className="h-10 w-10 rounded-lg bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center">
+                <Users className="h-5 w-5 text-blue-600 dark:text-blue-400" />
+              </div>
+              <div>
+                <p className="text-xs font-semibold text-gray-600 dark:text-slate-400">
+                  Total Voters
+                </p>
+                <p className="text-2xl font-bold text-gray-900 dark:text-white">
+                  {pollData.totalVoters}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-white dark:bg-slate-800 rounded-xl p-4 border border-gray-200 dark:border-slate-700">
+            <div className="flex items-center gap-3">
+              <div className="h-10 w-10 rounded-lg bg-green-100 dark:bg-green-900/30 flex items-center justify-center">
+                <CheckCircle className="h-5 w-5 text-green-600 dark:text-green-400" />
+              </div>
+              <div>
+                <p className="text-xs font-semibold text-gray-600 dark:text-slate-400">
+                  Votes Cast
+                </p>
+                <p className="text-2xl font-bold text-gray-900 dark:text-white">
+                  {pollData.votedCount}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-white dark:bg-slate-800 rounded-xl p-4 border border-gray-200 dark:border-slate-700">
+            <div className="flex items-center gap-3">
+              <div className="h-10 w-10 rounded-lg bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center">
+                <UserPlus className="h-5 w-5 text-purple-600 dark:text-purple-400" />
+              </div>
+              <div>
+                <p className="text-xs font-semibold text-gray-600 dark:text-slate-400">
+                  Candidates
+                </p>
+                <p className="text-2xl font-bold text-gray-900 dark:text-white">
+                  {pollData.candidates.length}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-white dark:bg-slate-800 rounded-xl p-4 border border-gray-200 dark:border-slate-700">
+            <div className="flex items-center gap-3">
+              <div className="h-10 w-10 rounded-lg bg-amber-100 dark:bg-amber-900/30 flex items-center justify-center">
+                <Clock className="h-5 w-5 text-amber-600 dark:text-amber-400" />
+              </div>
+              <div>
+                <p className="text-xs font-semibold text-gray-600 dark:text-slate-400">
+                  Days Left
+                </p>
+                <p className="text-2xl font-bold text-gray-900 dark:text-white">
+                  {Math.ceil(
+                    (new Date(pollData.endDate) - new Date()) /
+                      (1000 * 60 * 60 * 24)
+                  )}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}

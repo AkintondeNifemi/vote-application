@@ -146,6 +146,22 @@ export async function PUT(req, { params }) {
         }
       );
     }
+
+    // Check if user is already a candidate in this poll (any position)
+    const alreadyCandidate = await Contestant.findOne({
+      pollId: pollsId,
+      "candidates.userId": userId,
+    });
+
+    if (alreadyCandidate) {
+      return NextResponse.json(
+        {
+          error: `User is already a candidate for the position "${alreadyCandidate.position}"`,
+        },
+        { status: 400 }
+      );
+    }
+
     // add the new contestant to the list
     contestant?.candidates.push({
       userId: newCandidate._id,

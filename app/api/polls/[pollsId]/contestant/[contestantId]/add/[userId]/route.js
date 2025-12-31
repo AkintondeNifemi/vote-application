@@ -156,7 +156,7 @@ export async function PUT(req, { params }) {
     if (alreadyCandidate) {
       return NextResponse.json(
         {
-          error: `User is already a candidate for the position "${alreadyCandidate.position}"`,
+          error: `User is already a candidate for a position in this poll`,
         },
         { status: 400 }
       );

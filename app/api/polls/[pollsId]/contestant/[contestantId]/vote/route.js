@@ -98,7 +98,70 @@ export async function PUT(req, { params }) {
         }
       );
     }
-    
+    // check if the contestant exist
+    const contestant = await Contestant.findById(contestantId);
+    if (!contestant) {
+      return NextResponse.json(
+        { error: "Contestant does not exist" },
+        {
+          status: 400,
+        }
+      );
+    }
+    // check if the user has voted before
+    const hasUserVoted = contestant?.voters.find((voter) => {
+      return voter.toString() === userId.toString();
+    });
+    if (hasUserVoted) {
+      return NextResponse.json(
+        { error: "User has voted for a candidate in this position" },
+        {
+          status: 400,
+        }
+      );
+    }
+    // check if the candidate exist in this contestant
+    const candidateExistInContestant = contestant?.candidates?.find(
+      (candidate) => {
+        return candidate?.userId?.toString() === candidateUserId.toString();
+      }
+    );
+    if (!candidateExistInContestant) {
+      return NextResponse.json(
+        { error: "Candidate does not belong to this position" },
+        {
+          status: 400,
+        }
+      );
+    }
+    //if user has not voted and candidate exist in contestant
+    const voteUpdate = await Contestant.updateOne(
+      {
+        _id: contestantId,
+        voters: { $ne: userId },
+        "candidates.userId": candidateUserId,
+      },
+      {
+        $inc: { "candidates.$.votes": 1 },
+        $addToSet: { voters: userId },
+      }
+    );
+
+    if (voteUpdate.modifiedCount === 0) {
+      return NextResponse.json(
+        {
+          error:
+            "User has already voted for this position or candidate is invalid",
+        },
+        { status: 400 }
+      );
+    }
+
+    // mark user as completed voter (optional, still safe)
+    await Polls.updateOne(
+      { _id: pollsId },
+      { $addToSet: { completedVoters: userId } }
+    );
 
     //success
     return NextResponse.json(
@@ -115,117 +178,3 @@ export async function PUT(req, { params }) {
     );
   }
 }
-// export async function PUT(req, { params }) {
-//   const { pollsId, contestantId } = await params;
-//   const { userId, candidateUserId } = await req.json();
-
-//   // validate inputs
-//   if (!pollsId) {
-//     return NextResponse.json({ error: "Poll ID is required" }, { status: 400 });
-//   }
-//   if (!contestantId) {
-//     return NextResponse.json(
-//       { error: "Contestant ID is required" },
-//       { status: 400 }
-//     );
-//   }
-//   if (!userId) {
-//     return NextResponse.json(
-//       { error: "User ID is required to vote" },
-//       { status: 400 }
-//     );
-//   }
-//   if (!candidateUserId) {
-//     return NextResponse.json(
-//       { error: "Candidate ID is required" },
-//       { status: 400 }
-//     );
-//   }
-
-//   try {
-//     await connectDatabase();
-
-//     // Check if the poll exists in the database
-//     const poll = await Polls.findById(pollsId);
-//     if (!poll) {
-//       return NextResponse.json({ error: "No poll found." }, { status: 400 });
-//     }
-
-//     // Check if the user exists
-//     const user = await User.findById(userId);
-//     if (!user) {
-//       return NextResponse.json(
-//         { error: "User does not exist" },
-//         { status: 400 }
-//       );
-//     }
-
-//     // Check if user belongs to the poll
-//     const userBelongs = user?.voteInformation.find((info) => {
-//       return info?.pollId?.toString() === pollsId.toString();
-//     });
-//     if (!userBelongs) {
-//       return NextResponse.json(
-//         { error: "User doesnt belong to this poll" },
-//         { status: 400 }
-//       );
-//     }
-
-//     // Find the contestant (position)
-//     const contestant = await Contestant.findOne({
-//       _id: contestantId,
-//       pollId: pollsId,
-//     });
-//     if (!contestant) {
-//       return NextResponse.json(
-//         { error: "Position not found in this poll" },
-//         { status: 404 }
-//       );
-//     }
-
-//     // Check if user has already voted for this position
-//     if (contestant.voters.includes(userId)) {
-//       return NextResponse.json(
-//         { error: "You have already voted for this position" },
-//         { status: 400 }
-//       );
-//     }
-
-//     // Check if the candidate exists in this position
-//     const candidateExists = contestant.candidates.some(
-//       (candidate) => candidate.userId.toString() === candidateUserId
-//     );
-//     if (!candidateExists) {
-//       return NextResponse.json(
-//         { error: "Candidate not found in this position" },
-//         { status: 404 }
-//       );
-//     }
-
-//     // Update the contestant: increment votes for the candidate and add voter
-//     await Contestant.updateOne(
-//       { _id: contestantId, "candidates.userId": candidateUserId },
-//       {
-//         $inc: { "candidates.$.votes": 1 },
-//         $addToSet: { voters: userId },
-//       }
-//     );
-
-//     // Add user to completedVoters in Polls (only once, even if voting in multiple positions)
-//     await Polls.updateOne(
-//       { _id: pollsId },
-//       { $addToSet: { completedVoters: userId } }
-//     );
-
-//     return NextResponse.json(
-//       { message: "Vote recorded successfully" },
-//       { status: 200 }
-//     );
-//   } catch (err) {
-//     console.log(err);
-//     return NextResponse.json(
-//       { error: "An error was encountered while voting" },
-//       { status: 400 }
-//     );
-//   }
-// }

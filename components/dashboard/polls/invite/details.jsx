@@ -1,7 +1,33 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 
+import { toast } from "react-toastify";
+
 export default function InvitationDetails({ pollData }) {
+  async function handleAcceptInvitation() {
+    try {
+      const request = await fetch(
+        `/api/polls/${pollData._id.toString()}/join`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+        }
+      );
+      const response = await request.json();
+      console.log(response);
+      if (!request.ok || response?.error) {
+        return toast.error(response?.error || "An error occurred.");
+      }
+      toast.success(response?.message);
+      window.location.href = "/polls";
+    } catch (err) {
+      console.log(err);
+      return toast.error("Unstable internet connection");
+    }
+  }
   return (
     <div className="px-8 sm:px-12 py-10">
       <p className="text-gray-700 dark:text-slate-300 text-center mb-8 leading-relaxed">
@@ -71,7 +97,6 @@ export default function InvitationDetails({ pollData }) {
         </>
       )}
 
-      {/* From Section */}
       <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800/50 rounded-xl p-5 mb-10">
         <p className="text-xs font-bold text-blue-900 dark:text-blue-300 uppercase tracking-wider mb-3">
           Created By
@@ -93,10 +118,12 @@ export default function InvitationDetails({ pollData }) {
           </div>
         </div>
       </div>
-
-      {/* Action Buttons */}
       <div className="space-y-3">
-        <button className="w-full px-6 py-4 bg-linear-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 dark:from-blue-700 dark:to-blue-800 dark:hover:from-blue-800 dark:hover:to-blue-900 text-white font-bold rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl text-lg">
+        <button
+          onClick={handleAcceptInvitation}
+          type="button"
+          className="w-full px-6 py-4 bg-linear-to-r cursor-pointer from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 dark:from-blue-700 dark:to-blue-800 dark:hover:from-blue-800 dark:hover:to-blue-900 text-white font-bold rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl text-lg"
+        >
           Accept & Vote
         </button>
         <button className="w-full px-6 py-3 border-2 border-gray-300 dark:border-slate-600 text-gray-700 dark:text-slate-300 font-semibold rounded-xl hover:bg-gray-50 dark:hover:bg-slate-700/50 transition-all duration-200">

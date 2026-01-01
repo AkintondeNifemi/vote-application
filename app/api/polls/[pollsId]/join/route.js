@@ -2,9 +2,18 @@ import { NextResponse } from "next/server";
 import { connectDatabase } from "@/libs/connectdatabase";
 import Polls from "@/libs/models/polls.models";
 import User from "@/libs/models/user.models";
+import { auth } from "@/auth";
 
-export async function PUT(req, { params }) {
-  const { userId } = await req.json();
+export const PUT = auth(async function PUT(req, { params }) {
+  if (!req.auth || !req.auth.user) {
+    return NextResponse.json(
+      { error: "Unauthorized Access" },
+      {
+        status: 400,
+      }
+    );
+  }
+  const userId = req?.auth?.user?.id;
   const { pollsId } = await params;
   try {
     await connectDatabase();
@@ -116,4 +125,4 @@ export async function PUT(req, { params }) {
       }
     );
   }
-}
+});

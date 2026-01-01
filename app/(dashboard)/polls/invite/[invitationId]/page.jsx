@@ -3,19 +3,17 @@ import InvitationFooter from "@/components/dashboard/polls/invite/footer";
 import InvitationHeader from "@/components/dashboard/polls/invite/header";
 import InvitationError from "@/components/dashboard/polls/invite/error";
 import { cookies } from "next/headers";
+import { BASE_URL } from "@/libs/config/configuration";
 
 export default async function Page({ params }) {
   const { invitationId } = await params;
-  const request = await fetch(
-    `http://localhost:3000/api/polls/${invitationId}`,
-    {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Cookie: (await cookies()).toString(),
-      },
-    }
-  );
+  const request = await fetch(`${BASE_URL}/api/polls/${invitationId}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Cookie: (await cookies()).toString(),
+    },
+  });
   const response = await request.json();
   if (!request.ok || response?.error) {
     return <InvitationError errorType="not_found" />;

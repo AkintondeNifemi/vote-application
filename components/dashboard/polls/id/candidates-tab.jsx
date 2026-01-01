@@ -1,6 +1,6 @@
 import { Plus, Edit, Trash2, Mail, Building } from "lucide-react";
 
-export default function CandidatesTab({ pollData }) {
+export default function CandidatesTab({ pollData, poll }) {
   return (
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">

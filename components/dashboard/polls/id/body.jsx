@@ -9,7 +9,7 @@ import VotersTab from "./voters-tab";
 import SettingsTab from "./settings-tab";
 import PositionsTab from "./positions-tab";
 
-export default function PollsIdBody({ pollData }) {
+export default function PollsIdBody({ pollData, poll }) {
   const [activeTab, setActiveTab] = useState("overview");
   return (
     <>
@@ -17,7 +17,9 @@ export default function PollsIdBody({ pollData }) {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
         {activeTab === "overview" && <OverviewTab pollData={pollData} />}
-        {activeTab === "candidates" && <CandidatesTab pollData={pollData} />}
+        {activeTab === "candidates" && (
+          <CandidatesTab pollData={pollData} poll={poll} />
+        )}
         {activeTab === "vote" && <VoteTab pollData={pollData} />}
         {activeTab === "positions" && <PositionsTab pollData={pollData} />}
         {activeTab === "voters" && <VotersTab pollData={pollData} />}

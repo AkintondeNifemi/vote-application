@@ -15,7 +15,7 @@ export default async function PollDetailsPage({ params }) {
   });
   const response = await request.json();
   if (!request.ok || response?.error) return redirect("/polls");
-  const {poll}= response;
+  const { poll } = response;
   const pollData = {
     id: 1,
     title: "Q1 2025 Development Priorities",
@@ -104,7 +104,7 @@ export default async function PollDetailsPage({ params }) {
   return (
     <main className="min-h-screen bg-white dark:bg-slate-950 transition-colors">
       <PollsIdHeader pollData={poll} />
-      <PollsIdBody pollData={pollData} />
+      <PollsIdBody pollData={pollData} poll={poll} />
     </main>
   );
 }

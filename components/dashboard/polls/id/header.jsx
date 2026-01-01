@@ -16,6 +16,27 @@ const formatDate = (dateString) => {
   });
 };
 export default function PollsIdHeader({ pollData }) {
+  const {
+    title,
+    description,
+    status,
+    voters,
+    contestants,
+    createdAt,
+    completedVoters,
+  } = pollData;
+
+  function calculateCandidate(contestants) {
+    let totalCandidate = 0;
+    if (contestants.length <= 0) return totalCandidate;
+    // get the contestant
+    for (let i = 0; i < contestants.length; i++) {
+      totalCandidate += contestants[i].candidates.length;
+    }
+
+    return totalCandidate;
+  }
+
   return (
     <div className="bg-linear-to-r from-slate-50 to-blue-50 dark:from-slate-900 dark:to-slate-800 border-b border-gray-200 dark:border-slate-700 px-4 sm:px-6 py-6 sm:py-8">
       <div className="max-w-7xl mx-auto">
@@ -24,22 +45,22 @@ export default function PollsIdHeader({ pollData }) {
             <div className="flex items-center gap-3 mb-3">
               <span
                 className={`inline-block px-3 py-1 rounded-full text-xs font-bold ${
-                  pollData.status === "Active"
+                  status === "Active"
                     ? "bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400"
                     : "bg-gray-100 dark:bg-gray-900/30 text-gray-700 dark:text-gray-400"
                 }`}
               >
-                {pollData.status}
+                {status}
               </span>
               <span className="text-sm text-gray-600 dark:text-slate-400">
-                Created {formatDate(pollData.createdAt)}
+                Created {formatDate(createdAt)}
               </span>
             </div>
             <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mb-2">
-              {pollData.title}
+              {title}
             </h1>
             <p className="text-gray-600 dark:text-slate-400 text-base sm:text-lg max-w-3xl">
-              {pollData.description}
+              {description}
             </p>
           </div>
           <button className="px-4 py-2 border border-gray-300 dark:border-slate-600 rounded-lg text-gray-700 dark:text-slate-300 font-medium hover:bg-gray-50 dark:hover:bg-slate-700/50 transition-colors flex items-center gap-2 shrink-0 w-full sm:w-auto justify-center sm:justify-start">
@@ -59,7 +80,7 @@ export default function PollsIdHeader({ pollData }) {
                   Total Voters
                 </p>
                 <p className="text-2xl font-bold text-gray-900 dark:text-white">
-                  {pollData.totalVoters}
+                  {voters?.length}
                 </p>
               </div>
             </div>
@@ -75,7 +96,7 @@ export default function PollsIdHeader({ pollData }) {
                   Votes Cast
                 </p>
                 <p className="text-2xl font-bold text-gray-900 dark:text-white">
-                  {pollData.votedCount}
+                  {completedVoters?.length}
                 </p>
               </div>
             </div>
@@ -91,7 +112,7 @@ export default function PollsIdHeader({ pollData }) {
                   Candidates
                 </p>
                 <p className="text-2xl font-bold text-gray-900 dark:text-white">
-                  {pollData.candidates.length}
+                  {calculateCandidate(contestants) || 0}
                 </p>
               </div>
             </div>

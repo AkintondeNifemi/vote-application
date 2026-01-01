@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { connectDatabase } from "@/libs/connectdatabase";
 import Polls from "@/libs/models/polls.models";
 import User from "@/libs/models/user.models";
+import Contestant from "@/libs/models/contestant.models";
 
 export async function GET(req, { params }) {
   const { pollsId } = await params;
@@ -16,10 +17,9 @@ export async function GET(req, { params }) {
   try {
     await connectDatabase();
     // check if the poll  exist
-    const poll = await Polls.findById(pollsId).populate(
-      "userId",
-      "name email image"
-    );
+    const poll = await Polls.findById(pollsId)
+      .populate("userId", "name email image")
+      .populate("contestants");
     // if no poll return an error
     if (!poll) {
       return NextResponse.json(

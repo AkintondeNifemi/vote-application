@@ -32,8 +32,23 @@ export async function GET(req, { params }) {
     const contestant = await Contestant.find({ pollId: pollsId }).populate(
       "candidates"
     );
+    // get all the total candidate in the Contestant
+    const candidate = [];
+    // if there is no contestant
+    if (contestant.length <= 0) {
+      return NextResponse.json(
+        { candidate },
+        {
+          status: 200,
+        }
+      );
+    }
+    // get all candidate if they exist
+    for (let i = 0; i < contestant.length; i++) {
+      candidate.push(...contestant[i].candidates);
+    }
     return NextResponse.json(
-      { contestant },
+      { candidate },
       {
         status: 200,
       }

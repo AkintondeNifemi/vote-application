@@ -20,14 +20,15 @@ export default function PositionsTab({ pollData, pollId }) {
         const response = await request.json();
         if (!request.ok || response?.error) {
           toast.error(response?.error || "An error occurred.");
-          return setPositions([]);
+          return setPosition([]);
         }
-        setPositions(response?.contestant);
+        setPosition(response?.contestant);
       } catch (err) {
         console.log(err);
         return toast.error("Network Error");
       }
     }
+    fetchPosition();
   }, [pollId]);
 
   const handleAddPosition = () => {
@@ -77,10 +78,10 @@ export default function PositionsTab({ pollData, pollId }) {
       {/* Positions List */}
       <div className="space-y-3">
         <h2 className="text-base sm:text-lg font-bold text-gray-900 dark:text-white">
-          Positions ({positions.length})
+          Positions ({position.length})
         </h2>
 
-        {positions.length === 0 ? (
+        {position.length === 0 ? (
           <div className="bg-gray-50 dark:bg-slate-800 rounded-lg p-6 sm:p-8 text-center border border-gray-200 dark:border-slate-700">
             <Award className="h-8 w-8 text-gray-400 dark:text-slate-600 mx-auto mb-2" />
             <p className="text-sm sm:text-base text-gray-600 dark:text-slate-400 font-medium">
@@ -89,22 +90,22 @@ export default function PositionsTab({ pollData, pollId }) {
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
-            {positions.map((position) => (
+            {position.map((p) => (
               <div
-                key={position.id}
+                key={p._id}
                 className="bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-lg p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center sm:justify-between hover:shadow-md transition-shadow gap-3 sm:gap-0"
               >
                 <div className="flex-1 min-w-0">
                   <h3 className="font-semibold text-gray-900 dark:text-white text-sm sm:text-base truncate">
-                    {position.name}
+                    {p?.position}
                   </h3>
                   <div className="flex items-center gap-1 text-xs sm:text-sm text-gray-500 dark:text-slate-400 mt-2 sm:mt-1">
                     <Users className="h-4 w-4 shrink-0" />
-                    <span>{position.users?.length || 0} people</span>
+                    <span>{p?.candidates?.length || 0} people</span>
                   </div>
                 </div>
                 <button
-                  onClick={() => handleDeletePosition(position.id)}
+                  onClick={() => handleDeletePosition(position._id)}
                   className="w-full sm:w-auto px-3 py-2 text-red-600 dark:text-red-400 hover:bg-red-100 dark:hover:bg-red-900/30 rounded-lg transition-colors font-medium text-sm sm:font-normal sm:p-2"
                   title="Delete position"
                 >

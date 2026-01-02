@@ -1,6 +1,37 @@
 import { Plus, Edit, Trash2, Mail, Building } from "lucide-react";
+import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
-export default function CandidatesTab({ pollData, poll }) {
+export default function CandidatesTab({ pollData, poll, pollId }) {
+  console.log(pollId);
+  const [candidate, setCandidate] = useState([]);
+  useEffect(() => {
+    async function fetchCandidates() {
+      try {
+        const request = await fetch(
+          `/api/polls/${pollId}/contestant/candidate`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            credentials: "include",
+          }
+        );
+        const response = await request.json();
+        if (!request.ok || response?.error) {
+          toast.error(response?.error || "An error occurred");
+          return setCandidate([]);
+        }
+        setCandidate(response?.candidate);
+      } catch (err) {
+        console.log(err);
+        toast.error("Network Error");
+        return setCandidate([]);
+      }
+    }
+    fetchCandidates();
+  }, [pollId]);
   return (
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">

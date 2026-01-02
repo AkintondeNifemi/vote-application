@@ -31,7 +31,7 @@ export async function GET(req, { params }) {
     // check if the contestant has any one with this poll id
     const contestant = await Contestant.find({ pollId: pollsId }).populate(
       "candidates"
-    );
+    ).populate("candidates.userId");
     // get all the total candidate in the Contestant
     const candidate = [];
     // if there is no contestant

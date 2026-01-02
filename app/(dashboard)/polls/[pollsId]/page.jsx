@@ -104,7 +104,7 @@ export default async function PollDetailsPage({ params }) {
   return (
     <main className="min-h-screen bg-white dark:bg-slate-950 transition-colors">
       <PollsIdHeader pollData={poll} />
-      <PollsIdBody pollData={pollData} poll={poll} />
+      <PollsIdBody pollData={pollData} poll={poll} pollId={pollsId} />
     </main>
   );
 }

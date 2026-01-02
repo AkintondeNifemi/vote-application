@@ -21,7 +21,9 @@ export default function PollsIdBody({ pollData, poll, pollId }) {
           <CandidatesTab pollData={pollData} poll={poll} pollId={pollId} />
         )}
         {activeTab === "vote" && <VoteTab pollData={pollData} />}
-        {activeTab === "positions" && <PositionsTab pollData={pollData} />}
+        {activeTab === "positions" && (
+          <PositionsTab pollData={pollData} pollId={pollId} />
+        )}
         {activeTab === "voters" && <VotersTab pollData={pollData} />}
         {activeTab === "settings" && <SettingsTab pollData={pollData} />}
       </div>

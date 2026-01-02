@@ -1,10 +1,10 @@
+/* eslint-disable @next/next/no-img-element */
 import { Plus, Edit, Trash2, Mail, Building } from "lucide-react";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 export default function CandidatesTab({ pollData, poll, pollId }) {
-  console.log(pollId);
-  const [candidate, setCandidate] = useState([]);
+  const [candidates, setCandidate] = useState([]);
   useEffect(() => {
     async function fetchCandidates() {
       try {
@@ -45,25 +45,33 @@ export default function CandidatesTab({ pollData, poll, pollId }) {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-        {pollData.candidates.map((candidate) => (
+        {candidates.map((candidate) => (
           <div
-            key={candidate.id}
+            key={candidate._id}
             className="bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-2xl p-4 sm:p-6 hover:border-blue-300 dark:hover:border-blue-600 transition-colors"
           >
             <div className="flex items-start justify-between mb-4">
               <div className="flex items-start gap-4">
-                <div className="h-12 w-12 rounded-full bg-linear-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white font-bold shrink-0">
-                  {candidate.name
-                    .split(" ")
-                    .map((n) => n[0])
-                    .join("")}
-                </div>
+                {candidate?.userId?.image ? (
+                  <img
+                    src={candidate?.userId?.image}
+                    className="h-12 w-12 rounded-full border-gray-600 dark:border-white border "
+                    alt={candidate?.userId?.name}
+                  />
+                ) : (
+                  <div className="h-12 w-12 rounded-full bg-linear-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white font-bold shrink-0">
+                    {candidate?.userId?.name
+                      .split(" ")
+                      .map((n) => n[0])
+                      .join("")}
+                  </div>
+                )}
                 <div>
                   <h3 className="font-bold text-gray-900 dark:text-white">
-                    {candidate.name}
+                    {candidate?.userId?.name}
                   </h3>
-                  <p className="text-sm text-blue-600 dark:text-blue-400">
-                    {candidate.role}
+                  <p className="text-sm capitalize text-blue-600 dark:text-blue-400">
+                    {candidate?.position}
                   </p>
                 </div>
               </div>
@@ -81,13 +89,13 @@ export default function CandidatesTab({ pollData, poll, pollId }) {
               <div className="flex items-center gap-2">
                 <Mail className="h-4 w-4 text-gray-500 dark:text-slate-500" />
                 <p className="text-sm text-gray-600 dark:text-slate-400">
-                  {candidate.email}
+                  {candidate?.userId?.email}
                 </p>
               </div>
               <div className="flex items-center gap-2">
                 <Building className="h-4 w-4 text-gray-500 dark:text-slate-500" />
                 <p className="text-sm text-gray-600 dark:text-slate-400">
-                  {candidate.department}
+                  {candidate?.userId?.department || "No departement yet"}
                 </p>
               </div>
             </div>

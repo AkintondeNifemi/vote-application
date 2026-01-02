@@ -1,9 +1,8 @@
-"use client";
-
 import { useState } from "react";
 import { Plus, Trash2, Award, Users } from "lucide-react";
 
-export default function PositionsTab({ pollData }) {
+export default function PositionsTab({ pollData, pollId }) {
+  const [position, setPosition] = useState([]);
   const [positions, setPositions] = useState(pollData.positions || []);
   const [newPositionName, setNewPositionName] = useState("");
 

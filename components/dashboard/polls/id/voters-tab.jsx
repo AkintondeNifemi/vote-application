@@ -11,7 +11,7 @@ const formatDate = (dateString) => {
   });
 };
 
-export default function VotersTab({ pollData }) {
+export default function VotersTab({ pollData, poll }) {
   return (
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
@@ -39,9 +39,7 @@ export default function VotersTab({ pollData }) {
                   <th className="px-6 py-3 text-left text-xs font-bold text-gray-600 dark:text-slate-400 uppercase tracking-wider">
                     Status
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-bold text-gray-600 dark:text-slate-400 uppercase tracking-wider">
-                    Voted At
-                  </th>
+
                   <th className="px-6 py-3 text-right text-xs font-bold text-gray-600 dark:text-slate-400 uppercase tracking-wider">
                     Actions
                   </th>
@@ -85,9 +83,7 @@ export default function VotersTab({ pollData }) {
                         </span>
                       )}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600 dark:text-slate-400">
-                      {voter.votedAt ? formatDate(voter.votedAt) : "—"}
-                    </td>
+
                     <td className="px-6 py-4 whitespace-nowrap text-right">
                       <div className="flex items-center justify-end gap-2">
                         {!voter.blocked ? (

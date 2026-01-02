@@ -1,12 +1,20 @@
-import { Plus, Trash2, CheckCircle } from "lucide-react";
-import { useEffect, useState } from "react";
-import { toast } from "react-toastify";
+import LoadingSpinner from "@/components/loadingspinner";
+import {CheckCircle, Plus, Trash2} from "lucide-react";
+import {useEffect, useState} from "react";
+import {toast} from "react-toastify";
 
-export default function VotersTab({ pollData, poll, pollId }) {
+export default function VotersTab({  poll, pollId }) {
   const [voters, setVoters] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const completedVoters = poll?.completedVoters;
+  function checkIfUserHasVoted(userId) {
+    return completedVoters.find((user) => user === userId);
+  }
+
   useEffect(() => {
     async function fetchVoters() {
       try {
+        setLoading(true);
         const request = await fetch(`/api/polls/${pollId}/voters/`, {
           method: "GET",
           headers: {
@@ -17,17 +25,22 @@ export default function VotersTab({ pollData, poll, pollId }) {
         const response = await request.json();
         if (!request.ok || response?.error) {
           toast.error(response?.error || "An error occurred");
+          setLoading(false);
           return setVoters([]);
         }
         setVoters(response?.voters);
+        setLoading(false);
       } catch (err) {
         console.log(err);
         setVoters([]);
+        setLoading(false);
         return toast.error("Network Error");
       }
     }
     fetchVoters();
   }, [pollId]);
+
+  if (loading) return <LoadingSpinner />;
   return (
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
@@ -62,15 +75,15 @@ export default function VotersTab({ pollData, poll, pollId }) {
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200 dark:divide-slate-700">
-                {pollData.voters.map((voter) => (
+                {voters.map((voter) => (
                   <tr
-                    key={voter.id}
+                    key={voter._id}
                     className="hover:bg-gray-50 dark:hover:bg-slate-700/30 transition-colors"
                   >
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div>
-                        <p className="font-semibold text-gray-900 dark:text-white">
-                          {voter.name}
+                        <p className="font-semibold capitalize text-gray-900 dark:text-white">
+                          {voter?.name}
                         </p>
                         <p className="text-sm text-gray-600 dark:text-slate-400">
                           {voter.email}
@@ -79,11 +92,11 @@ export default function VotersTab({ pollData, poll, pollId }) {
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <span className="px-2.5 py-1 bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-400 text-xs font-semibold rounded-full uppercase">
-                        {voter.department}
+                        {voter?.department || "No Department Yet"}
                       </span>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      {voter.voted ? (
+                      {checkIfUserHasVoted(voter._id) ? (
                         <span className="px-2.5 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 text-xs font-semibold rounded-full flex items-center gap-1 w-fit">
                           <CheckCircle className="h-3 w-3" />
                           Voted

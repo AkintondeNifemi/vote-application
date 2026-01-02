@@ -49,7 +49,6 @@ export default function PositionsTab({ pollData, pollId }) {
 
   return (
     <div className="space-y-4 sm:space-y-6 px-4 sm:px-0">
-      {/* Add Position Form */}
       <div className="bg-white dark:bg-slate-800 rounded-lg p-4 sm:p-6 border border-gray-200 dark:border-slate-700">
         <h2 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white mb-4">
           Create Position
@@ -75,7 +74,6 @@ export default function PositionsTab({ pollData, pollId }) {
         </div>
       </div>
 
-      {/* Positions List */}
       <div className="space-y-3">
         <h2 className="text-base sm:text-lg font-bold text-gray-900 dark:text-white">
           Positions ({position.length})

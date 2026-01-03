@@ -13,7 +13,6 @@ import PositionsTab from "./positions-tab";
 export default function PollsIdBody({ pollData, poll, pollId }) {
   const [activeTab, setActiveTab] = useState("overview");
 
-  // Keep the selected tab in sync with the URL hash so reloads restore the same view
   useEffect(() => {
     const hash = typeof window !== "undefined" ? window.location.hash : "";
     const initialTab = hash?.replace("#", "") || "overview";
@@ -41,7 +40,7 @@ export default function PollsIdBody({ pollData, poll, pollId }) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
         {activeTab === "overview" && (
           <div id="overview">
-            <OverviewTab pollData={pollData} />
+            <OverviewTab pollData={pollData} poll={poll} />
           </div>
         )}
         {activeTab === "candidates" && (

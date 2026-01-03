@@ -1,7 +1,20 @@
 import VoteCandidate from "@/components/dashboard/polls/vote/votecandidate";
 import { ArrowRight, CheckCircle, Clock, Info, User } from "lucide-react";
+import { BASE_URL } from "@/libs/config/configuration";
+import { cookies } from "next/headers";
 
 export default async function VotingPage({ params, contestantProp }) {
+  const { pollsId, voteId } = await params;
+  const request = await fetch(
+    `${BASE_URL}/api/polls/${pollsId}/contestant/${voteId}`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Cookie: (await cookies()).toString(),
+      },
+    }
+  );
   // Static template: pass `contestant` as a prop; hook-free so you can wire fetching/state yourself.
   const contestant = contestantProp || {
     _id: "6956e115248243c2988fa1e1",

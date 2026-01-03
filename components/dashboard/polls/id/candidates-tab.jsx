@@ -71,10 +71,6 @@ export default function CandidatesTab({ pollData, poll, pollId }) {
           <p className="text-gray-600 dark:text-slate-400 mb-6">
             Start adding candidates for your positions
           </p>
-          <button className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors inline-flex items-center gap-2">
-            <Plus className="h-4 w-4" />
-            Add First Candidate
-          </button>
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

@@ -57,11 +57,6 @@ export default function VoteCandidate({ candidates, contestant }) {
   const safeContestant = baseContestant || fallbackContestant;
   const safeCandidates =
     candidates && candidates.length ? candidates : safeContestant.candidates;
-
-  const totalVotes = safeCandidates.reduce(
-    (sum, current) => sum + (Number(current?.votes) || 0),
-    0
-  );
   const positionLabel = safeContestant?.position || "Position";
 
   const handleSelect = (id) => {
@@ -74,39 +69,7 @@ export default function VoteCandidate({ candidates, contestant }) {
   };
 
   return (
-    <section className="max-w-5xl mx-auto px-5 sm:px-6 lg:px-8 py-12 space-y-8">
-      <div className="rounded-3xl bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white p-8 shadow-xl border border-gray-800">
-        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-          <div className="space-y-2">
-            <p className="text-xs uppercase tracking-[0.12em] font-semibold text-gray-400">
-              Vote
-            </p>
-            <h1 className="text-3xl font-bold leading-tight">
-              Select your candidate
-            </h1>
-            <p className="text-sm text-gray-300 max-w-2xl">
-              Review the profiles for the {positionLabel} role and choose the
-              person you want to represent you. You can change your selection
-              until you submit.
-            </p>
-          </div>
-          <div className="grid grid-cols-2 gap-3 w-full sm:w-auto sm:min-w-[260px]">
-            <div className="rounded-2xl bg-white/5 border border-white/10 p-4">
-              <p className="text-xs text-gray-400">Position</p>
-              <p className="text-lg font-semibold">{positionLabel}</p>
-            </div>
-            <div className="rounded-2xl bg-white/5 border border-white/10 p-4">
-              <p className="text-xs text-gray-400">Total candidates</p>
-              <p className="text-lg font-semibold">{safeCandidates.length}</p>
-            </div>
-            <div className="rounded-2xl bg-white/5 border border-white/10 p-4 col-span-2">
-              <p className="text-xs text-gray-400">Votes recorded</p>
-              <p className="text-lg font-semibold">{totalVotes}</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
+    <section className="max-w-5xl mx-auto px-5 sm:px-6 lg:px-8 py-6 space-y-6">
       <div className="grid gap-5 md:grid-cols-2">
         {safeCandidates.map((candidate) => {
           const isSelected = selectedCandidate === candidate._id;

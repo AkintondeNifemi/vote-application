@@ -1,5 +1,5 @@
 import VoteCandidate from "@/components/dashboard/polls/vote/votecandidate";
-import { ArrowRight, CheckCircle, Clock, Info, User } from "lucide-react";
+import { Clock, Info, User } from "lucide-react";
 import { BASE_URL } from "@/libs/config/configuration";
 import { cookies } from "next/headers";
 
@@ -49,6 +49,12 @@ export default async function VotingPage({ params, contestantProp }) {
   };
 
   const candidates = contestant?.candidates || [];
+  const positionLabel = contestant?.position || "Position";
+  const totalCandidates = candidates.length;
+  const totalVotes = candidates.reduce(
+    (sum, current) => sum + (Number(current?.votes) || 0),
+    0
+  );
 
   const formatDate = (dateString) => {
     if (!dateString) return "";

@@ -4,7 +4,7 @@ import { Plus, Users, Mail, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
-export default function CandidatesTab({ pollData, poll, pollId }) {
+export default function CandidatesTab({ poll, pollId }) {
   const voters = poll?.voters || [];
   const [candidates, setCandidate] = useState([]);
   const [loading, setLoading] = useState(false);

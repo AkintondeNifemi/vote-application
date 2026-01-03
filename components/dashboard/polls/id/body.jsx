@@ -46,7 +46,7 @@ export default function PollsIdBody({ pollData, poll, pollId }) {
         )}
         {activeTab === "candidates" && (
           <div id="candidates">
-            <CandidatesTab pollData={pollData} poll={poll} pollId={pollId} />
+            <CandidatesTab poll={poll} pollId={pollId} />
           </div>
         )}
         {activeTab === "vote" && (
@@ -56,12 +56,12 @@ export default function PollsIdBody({ pollData, poll, pollId }) {
         )}
         {activeTab === "positions" && (
           <div id="positions">
-            <PositionsTab pollData={pollData} pollId={pollId} />
+            <PositionsTab pollId={pollId} />
           </div>
         )}
         {activeTab === "voters" && (
           <div id="voters">
-            <VotersTab pollData={pollData} poll={poll} pollId={pollId} />
+            <VotersTab poll={poll} pollId={pollId} />
           </div>
         )}
         {activeTab === "settings" && (

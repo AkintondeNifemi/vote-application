@@ -57,6 +57,7 @@ export default function CandidatesTab({ pollData, poll, pollId }) {
     }
     setSubmitting(true);
     try {
+      console.log(selectedPosition, selectedUser);
       const request = await fetch(
         `/api/polls/${pollId}/contestant/${selectedPosition}/add/${selectedUser}`,
         {
@@ -68,6 +69,7 @@ export default function CandidatesTab({ pollData, poll, pollId }) {
         }
       );
       const response = await request.json();
+      console.log(response);
       if (!request.ok || response?.error) {
         setSubmitting(false);
         return toast.error(response?.error || "An error occurred");
@@ -78,8 +80,6 @@ export default function CandidatesTab({ pollData, poll, pollId }) {
       console.log(err);
       setSubmitting(false);
       return toast.error("Network Error");
-    } finally {
-      setSubmitting(false);
     }
   }
   return (

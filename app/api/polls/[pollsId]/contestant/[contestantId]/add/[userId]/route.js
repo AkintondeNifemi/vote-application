@@ -3,9 +3,18 @@ import { connectDatabase } from "@/libs/connectdatabase";
 import User from "@/libs/models/user.models";
 import Polls from "@/libs/models/polls.models";
 import Contestant from "@/libs/models/contestant.models";
+import { auth } from "@/auth";
 
-export async function PUT(req, { params }) {
-  const { authorizationUserId } = await req.json();
+export const PUT = auth(async function PUT(req, { params }) {
+  if (!req.auth || !req.auth.user) {
+    return NextResponse.json(
+      { error: "Unauthorized Access" },
+      {
+        status: 400,
+      }
+    );
+  }
+  const authorizationUserId = req?.auth?.user?.id;
   const { pollsId, contestantId, userId } = await params;
   if (!authorizationUserId) {
     return NextResponse.json(
@@ -191,4 +200,4 @@ export async function PUT(req, { params }) {
       }
     );
   }
-}
+});

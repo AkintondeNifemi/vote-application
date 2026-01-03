@@ -12,14 +12,6 @@ export default function CandidatesTab({ pollData, poll, pollId }) {
   const [selectedUser, setSelectedUser] = useState("");
   const [selectedPosition, setSelectedPosition] = useState("");
 
-  // Static users data (replace with actual data later)
-  const staticUsers = [
-    { _id: "1", name: "John Doe", email: "john@example.com" },
-    { _id: "2", name: "Jane Smith", email: "jane@example.com" },
-    { _id: "3", name: "Mike Johnson", email: "mike@example.com" },
-    { _id: "4", name: "Sarah Williams", email: "sarah@example.com" },
-  ];
-
   // Get positions from poll
   const positions = poll?.contestants || [];
   useEffect(() => {
@@ -55,6 +47,35 @@ export default function CandidatesTab({ pollData, poll, pollId }) {
   }, [pollId]);
 
   if (loading) return <LoadingSpinner />;
+  async function setupCandidate() {
+    if (!selectedUser) {
+      return toast.error("No user selected!");
+    }
+    if (!selectedPosition) {
+      return toast.error("No position selected!");
+    }
+    try {
+      const request = await fetch(
+        `/api/polls/${pollId}/contestant/${selectedPosition}/add/${selectedUser}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+        }
+      );
+      const response = await request.json();
+      if (!request.ok || response?.error) {
+        return toast.error(response?.error || "An error occurred");
+      }
+      toast.success(response?.message);
+      window.location.reload();
+    } catch (err) {
+      console.log(err);
+      return toast.error("Network Error");
+    }
+  }
   return (
     <div className="space-y-6">
       {/* Header with Add Button */}
@@ -152,7 +173,6 @@ export default function CandidatesTab({ pollData, poll, pollId }) {
           ))}
         </div>
       )}
-      {/* Add Candidate Modal */}
       {isModalOpen && (
         <div className="fixed inset-0 bg-black/50 dark:bg-black/70 backdrop-blur-sm z-50 flex items-center sm:items-center justify-center p-4 sm:p-0">
           <div className="bg-white dark:bg-slate-800 rounded-xl sm:rounded-2xl w-full sm:w-full sm:max-w-96 max-h-[85vh] sm:max-h-[90vh] overflow-y-auto shadow-2xl">
@@ -167,31 +187,61 @@ export default function CandidatesTab({ pollData, poll, pollId }) {
                   setSelectedUser("");
                   setSelectedPosition("");
                 }}
-                className="text-gray-500 dark:text-slate-400 hover:text-gray-700 dark:hover:text-slate-300 transition-colors"
+                className="text-gray-500 cursor-pointer dark:text-slate-400 hover:text-gray-700 dark:hover:text-slate-300 transition-colors"
               >
                 <X className="h-6 w-6" />
               </button>
             </div>
 
-            {/* Modal Content */}
             <div className="px-6 py-6 space-y-6">
-              {/* User Dropdown */}
               <div>
                 <label className="block text-sm font-semibold text-gray-900 dark:text-white mb-3">
                   Select User
                 </label>
-                <select
-                  value={selectedUser}
-                  onChange={(e) => setSelectedUser(e.target.value)}
-                  className="w-full px-4 py-3 bg-white dark:bg-slate-700 border border-gray-300 dark:border-slate-600 rounded-lg text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 transition-all"
-                >
-                  <option value="">Choose a user...</option>
+                <div className="space-y-2 max-h-64 overflow-y-auto">
                   {voters.map((user) => (
-                    <option key={user._id} value={user._id}>
-                      {user.name} ({user.email})
-                    </option>
+                    <button
+                      key={user._id}
+                      onClick={() => setSelectedUser(user._id)}
+                      className={`w-full cursor-pointer flex items-center gap-3 px-4 py-3 rounded-lg border transition-all text-left ${
+                        selectedUser === user._id
+                          ? "border-blue-500 bg-blue-50 dark:bg-blue-900/30"
+                          : "border-gray-300 dark:border-slate-600 hover:border-gray-400 dark:hover:border-slate-500 bg-white dark:bg-slate-700"
+                      }`}
+                    >
+                      {user?.image ? (
+                        <img
+                          src={user.image}
+                          alt={user.name}
+                          className="h-10 w-10 rounded-full object-cover shrink-0"
+                        />
+                      ) : (
+                        <div className="h-10 w-10 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold text-sm shrink-0">
+                          {user.name
+                            ?.split(" ")
+                            .map((n) => n[0])
+                            .join("")
+                            .toUpperCase() || "?"}
+                        </div>
+                      )}
+                      <div className="flex-1 min-w-0">
+                        <p className="font-semibold text-gray-900 dark:text-white truncate">
+                          {user.name}
+                        </p>
+                        <p className="text-xs text-gray-600 dark:text-slate-400 truncate">
+                          {user.email}
+                        </p>
+                      </div>
+                      {selectedUser === user._id && (
+                        <div className="h-5 w-5 rounded-full bg-blue-600 flex items-center justify-center shrink-0">
+                          <span className="text-white font-bold text-xs">
+                            ✓
+                          </span>
+                        </div>
+                      )}
+                    </button>
                   ))}
-                </select>
+                </div>
               </div>
 
               {/* Position Dropdown */}
@@ -214,7 +264,6 @@ export default function CandidatesTab({ pollData, poll, pollId }) {
               </div>
             </div>
 
-            {/* Modal Actions */}
             <div className="border-t border-gray-200 dark:border-slate-700 px-6 py-4 flex gap-3 flex-col-reverse sm:flex-row">
               <button
                 onClick={() => {
@@ -222,22 +271,13 @@ export default function CandidatesTab({ pollData, poll, pollId }) {
                   setSelectedUser("");
                   setSelectedPosition("");
                 }}
-                className="w-full px-4 py-3 border border-gray-300 dark:border-slate-600 text-gray-700 dark:text-slate-300 font-semibold rounded-lg hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors"
+                className="w-full cursor-pointer px-4 py-3 border border-gray-300 dark:border-slate-600 text-gray-700 dark:text-slate-300 font-semibold rounded-lg hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors"
               >
                 Cancel
               </button>
               <button
-                onClick={() => {
-                  if (!selectedUser || !selectedPosition) {
-                    toast.error("Please select both user and position");
-                    return;
-                  }
-                  toast.success("Candidate added successfully!");
-                  setIsModalOpen(false);
-                  setSelectedUser("");
-                  setSelectedPosition("");
-                }}
-                className="w-full px-4 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-colors"
+                onClick={setupCandidate}
+                className="w-full px-4 py-3 cursor-pointer bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-colors"
               >
                 Add Candidate
               </button>

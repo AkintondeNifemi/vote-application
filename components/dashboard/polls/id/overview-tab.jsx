@@ -189,63 +189,77 @@ export default function OverviewTab({ poll }) {
                 </div>
 
                 <div className="p-6 bg-gray-50/50 dark:bg-slate-900/30 space-y-4">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                    {topThree.map((candidate, index) => (
-                      <div
-                        key={candidate._id}
-                        className="flex items-start gap-3 p-4 bg-white dark:bg-slate-800 rounded-xl border border-gray-200 dark:border-slate-700 shadow-xs"
-                      >
-                        {candidate.image ? (
-                          <img
-                            src={candidate.image}
-                            alt={candidate.name}
-                            className="h-12 w-12 sm:h-14 sm:w-14 rounded-xl object-cover border border-gray-200 dark:border-slate-600"
-                          />
-                        ) : (
-                          <div className="h-12 w-12 sm:h-14 sm:w-14 rounded-xl bg-indigo-600 flex items-center justify-center text-white font-semibold text-lg sm:text-xl">
-                            {candidate.name.charAt(0).toUpperCase()}
-                          </div>
-                        )}
-                        <div className="flex-1 min-w-0 space-y-1.5">
-                          <div className="flex items-center gap-2">
-                            <span className="text-sm sm:text-base font-semibold text-gray-900 dark:text-white truncate">
-                              {candidate.name}
-                            </span>
-                            {index === 0 && (
-                              <span className="text-[11px] px-2 py-0.5 rounded-full bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-200 font-semibold">
-                                Top
-                              </span>
-                            )}
-                          </div>
-                          <p className="text-xs text-gray-500 dark:text-slate-400">
-                            Votes: {candidate.votes}
-                          </p>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-
-                  {position.candidates.length > 3 && (
-                    <div className="space-y-2 border border-gray-200 dark:border-slate-700 rounded-xl p-3 sm:p-4 bg-white dark:bg-slate-800">
-                      <p className="text-xs font-semibold text-gray-500 dark:text-slate-400 uppercase tracking-wide">
-                        Other candidates
+                  {position.candidates.length === 0 ? (
+                    <div className="py-10 text-center bg-white dark:bg-slate-800 rounded-xl border-2 border-dashed border-gray-300 dark:border-slate-600">
+                      <Users className="h-12 w-12 text-gray-300 dark:text-slate-600 mx-auto mb-3" />
+                      <p className="text-gray-700 dark:text-slate-200 font-semibold text-base">
+                        No candidates added yet
                       </p>
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
-                        {position.candidates.slice(3).map((candidate) => (
+                      <p className="text-gray-500 dark:text-slate-400 text-sm mt-1">
+                        Add candidates to see them here.
+                      </p>
+                    </div>
+                  ) : (
+                    <>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                        {topThree.map((candidate, index) => (
                           <div
                             key={candidate._id}
-                            className="flex items-center justify-between rounded-lg border border-gray-200 dark:border-slate-700 px-3 py-2 bg-white dark:bg-slate-800"
+                            className="flex items-start gap-3 p-4 bg-white dark:bg-slate-800 rounded-xl border border-gray-200 dark:border-slate-700 shadow-xs"
                           >
-                            <span className="text-sm text-gray-800 dark:text-slate-200 truncate">
-                              {candidate.name}
-                            </span>
-                            <span className="text-sm font-semibold text-gray-900 dark:text-white">
-                              {candidate.votes}
-                            </span>
+                            {candidate.image ? (
+                              <img
+                                src={candidate.image}
+                                alt={candidate.name}
+                                className="h-12 w-12 sm:h-14 sm:w-14 rounded-xl object-cover border border-gray-200 dark:border-slate-600"
+                              />
+                            ) : (
+                              <div className="h-12 w-12 sm:h-14 sm:w-14 rounded-xl bg-indigo-600 flex items-center justify-center text-white font-semibold text-lg sm:text-xl">
+                                {candidate.name.charAt(0).toUpperCase()}
+                              </div>
+                            )}
+                            <div className="flex-1 min-w-0 space-y-1.5">
+                              <div className="flex items-center gap-2">
+                                <span className="text-sm sm:text-base font-semibold text-gray-900 dark:text-white truncate">
+                                  {candidate.name}
+                                </span>
+                                {index === 0 && (
+                                  <span className="text-[11px] px-2 py-0.5 rounded-full bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-200 font-semibold">
+                                    Top
+                                  </span>
+                                )}
+                              </div>
+                              <p className="text-xs text-gray-500 dark:text-slate-400">
+                                Votes: {candidate.votes}
+                              </p>
+                            </div>
                           </div>
                         ))}
                       </div>
-                    </div>
+
+                      {position.candidates.length > 3 && (
+                        <div className="space-y-2 border border-gray-200 dark:border-slate-700 rounded-xl p-3 sm:p-4 bg-white dark:bg-slate-800">
+                          <p className="text-xs font-semibold text-gray-500 dark:text-slate-400 uppercase tracking-wide">
+                            Other candidates
+                          </p>
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
+                            {position.candidates.slice(3).map((candidate) => (
+                              <div
+                                key={candidate._id}
+                                className="flex items-center justify-between rounded-lg border border-gray-200 dark:border-slate-700 px-3 py-2 bg-white dark:bg-slate-800"
+                              >
+                                <span className="text-sm text-gray-800 dark:text-slate-200 truncate">
+                                  {candidate.name}
+                                </span>
+                                <span className="text-sm font-semibold text-gray-900 dark:text-white">
+                                  {candidate.votes}
+                                </span>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+                    </>
                   )}
                 </div>
               </div>

@@ -60,7 +60,7 @@ export async function GET(req, { params }) {
       _id: contestantId,
       pollId: pollsId,
     })
-      .populate("candidates.userId", "name image department faculty")
+      .populate("candidates.userId", "name image department faculty email")
       .populate("pollId", "startDate endDate title description");
     return NextResponse.json(
       { contestant: contestants },

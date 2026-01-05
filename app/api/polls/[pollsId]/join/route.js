@@ -82,7 +82,7 @@ export const PUT = auth(async function PUT(req, { params }) {
       }
     }
     // checking the departments code
-    if (departmentCodes.length > 0) {
+    if (departmentCodes.length > 0 && emailPrefix.trim() !== "") {
       const userDepartmentCode = departmentCodes.find((code) => {
         const emailRegex = new RegExp(
           `^[a-zA-Z0-9_.]+\\.${code}\\d+${emailPrefix.replace(/\./g, "\\.")}$`

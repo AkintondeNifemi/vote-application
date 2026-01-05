@@ -58,9 +58,9 @@ export const GET = auth(async function GET(req, { params }) {
     const stream = new ReadableStream({
       start(controller) {
         // Send initial message
-        controller.enqueue(
-          new TextEncoder().encode(`data: ${JSON.stringify({ poll })}\n\n`)
-        );
+        const initial = JSON.stringify({ poll });
+        controller.enqueue(new TextEncoder().encode(`data: ${initial}\n\n`));
+        let lastPayload = initial;
 
         // Send updates every second
         interval = setInterval(async () => {
@@ -70,9 +70,14 @@ export const GET = auth(async function GET(req, { params }) {
               .populate("contestants")
               .populate("voters");
 
-            controller.enqueue(
-              new TextEncoder().encode(`data: ${JSON.stringify({ poll })}\n\n`)
-            );
+            const current = JSON.stringify({ poll });
+
+            if (current !== lastPayload) {
+              controller.enqueue(
+                new TextEncoder().encode(`data: ${current}\n\n`)
+              );
+              lastPayload = current;
+            }
           } catch (err) {
             // client disconnected, stop interval
             clearInterval(interval);

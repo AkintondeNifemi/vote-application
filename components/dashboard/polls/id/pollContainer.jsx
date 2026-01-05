@@ -1,33 +1,31 @@
 "use client";
 import PollsIdHeader from "@/components/dashboard/polls/id/header";
 import PollsIdBody from "@/components/dashboard/polls/id/body";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { toast } from "react-toastify";
 export default function PollIdContainer({ polls, pollsId }) {
-  const [poll, setPoll] = useState(polls);
-  //     useEffect(() => {
-  //     const streamRequest = new EventSource(
-  //       `/api/boards/${boardId}/assignments/stream`,
-  //       {
-  //         withCredentials: true,
-  //       }
-  //     );
+  const [poll, setPoll] = useState(polls || {});
+  useEffect(() => {
+    const streamRequest = new EventSource(`/api/polls/${pollsId}/stream`, {
+      withCredentials: true,
+    });
 
-  //     streamRequest.onmessage = (event) => {
-  //       try {
-  //         const parsedData = JSON.parse(event.data);
-  //         setAssignment(parsedData.assignments);
-  //       } catch (err) {
-  //         toast.error("Abnormal Network. Please refresh the page.");
-  //       }
-  //     };
-  //     streamRequest.onerror = () => {
-  //       toast.error("Connection lost. Please refresh the page.");
-  //       streamRequest.close();
-  //     };
-  //     return () => {
-  //       streamRequest.close();
-  //     };
-  //   }, [pollsId]);
+    streamRequest.onmessage = (event) => {
+      try {
+        const parsedData = JSON.parse(event.data);
+        setPoll(parsedData.poll);
+      } catch (err) {
+        toast.error("Abnormal Network. Please refresh the page.");
+      }
+    };
+    streamRequest.onerror = () => {
+      toast.error("Connection lost. Please refresh the page.");
+      streamRequest.close();
+    };
+    return () => {
+      streamRequest.close();
+    };
+  }, [pollsId]);
   return (
     <>
       <PollsIdHeader pollData={poll} />

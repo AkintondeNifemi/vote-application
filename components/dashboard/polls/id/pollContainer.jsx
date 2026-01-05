@@ -3,7 +3,7 @@ import PollsIdHeader from "@/components/dashboard/polls/id/header";
 import PollsIdBody from "@/components/dashboard/polls/id/body";
 import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
-export default function PollIdContainer({ polls, pollsId }) {
+export default function PollIdContainer({ polls, pollsId, user }) {
   const [poll, setPoll] = useState(polls || {});
   useEffect(() => {
     const streamRequest = new EventSource(`/api/polls/${pollsId}/stream`, {
@@ -29,7 +29,7 @@ export default function PollIdContainer({ polls, pollsId }) {
   return (
     <>
       <PollsIdHeader pollData={poll} />
-      <PollsIdBody poll={poll} pollId={pollsId} />
+      <PollsIdBody poll={poll} pollId={pollsId} user={user} />
     </>
   );
 }

@@ -14,6 +14,8 @@ export default function OverviewTab({ poll }) {
         name: userMap[candidate.userId]?.name || "Unknown",
         email: userMap[candidate.userId]?.email || "N/A",
         image: userMap[candidate.userId]?.image || null,
+        department: userMap[candidate.userId]?.department || null,
+        faculty: userMap[candidate.userId]?.faculty || null,
       }))
       .sort((a, b) => b.votes - a.votes);
 
@@ -121,9 +123,40 @@ export default function OverviewTab({ poll }) {
                                   {candidate.name}
                                 </span>
                               </div>
-                              <p className="text-xs text-gray-500 dark:text-slate-400">
-                                Votes: {candidate.votes}
-                              </p>
+                              <div className="space-y-1 text-xs text-gray-600 dark:text-slate-300">
+                                <div className="flex gap-1">
+                                  <span className="text-[11px] uppercase tracking-wide text-gray-500 dark:text-slate-400">
+                                    Email:
+                                  </span>
+                                  <span
+                                    className="truncate font-medium text-gray-900 dark:text-white"
+                                    title={candidate.email}
+                                  >
+                                    {candidate.email}
+                                  </span>
+                                </div>
+                                <div className="flex gap-2 flex-wrap">
+                                  {/* IDs removed per request */}
+                                </div>
+                                {(candidate.department ||
+                                  candidate.faculty) && (
+                                  <div className="flex gap-2 flex-wrap text-[11px] font-semibold">
+                                    {candidate.department && (
+                                      <span className="inline-flex items-center rounded-md bg-emerald-50 dark:bg-emerald-900/30 px-2 py-0.5 text-emerald-700 dark:text-emerald-100">
+                                        {candidate.department}
+                                      </span>
+                                    )}
+                                    {candidate.faculty && (
+                                      <span className="inline-flex items-center rounded-md bg-indigo-50 dark:bg-indigo-900/30 px-2 py-0.5 text-indigo-700 dark:text-indigo-100">
+                                        {candidate.faculty}
+                                      </span>
+                                    )}
+                                  </div>
+                                )}
+                                <p className="text-[11px] font-semibold text-gray-700 dark:text-slate-200">
+                                  Votes: {candidate.votes}
+                                </p>
+                              </div>
                             </div>
                           </div>
                         ))}
@@ -143,9 +176,17 @@ export default function OverviewTab({ poll }) {
                                 <span className="text-sm text-gray-800 dark:text-slate-200 truncate">
                                   {candidate.name}
                                 </span>
-                                <span className="text-sm font-semibold text-gray-900 dark:text-white">
-                                  {candidate.votes}
-                                </span>
+                                <div className="text-right">
+                                  <p
+                                    className="text-xs text-gray-500 dark:text-slate-400 truncate"
+                                    title={candidate.email}
+                                  >
+                                    {candidate.email}
+                                  </p>
+                                  <p className="text-sm font-semibold text-gray-900 dark:text-white">
+                                    {candidate.votes}
+                                  </p>
+                                </div>
                               </div>
                             ))}
                           </div>

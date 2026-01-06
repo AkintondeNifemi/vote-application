@@ -6,11 +6,6 @@ import { BASE_URL } from "@/libs/config/configuration";
 import { redirect } from "next/dist/server/api-utils";
 import { cookies } from "next/headers";
 
-
-
-
-
-
 export default async function Page() {
   // send a request to the backend to get the user data
   const request = await fetch(`${BASE_URL}/api/user`, {
@@ -25,33 +20,6 @@ export default async function Page() {
   if (!request.ok || response.error) return redirect("/");
   const { user } = response;
   console.log("User data response:", user);
-
-  const fallbackUser = {
-    _id: "69541172141b7f27d67277d6",
-    name: "areo ayomide",
-    email: "areoayomide2008@gmail.com",
-    image:
-      "https://lh3.googleusercontent.com/a/ACg8ocKcF1ME3HsMJ_gDZeLPz7225HnBnzVY-p_DWJIaDEdWWSS11TQ=s96-c",
-    googleId: "111361482668372854457",
-    department: null,
-    faculty: null,
-    voteInformation: [
-      {
-        pollId: "695c0ce80183e6f7f7ae0456",
-        role: "Owner",
-        _id: "695c0ce80183e6f7f7ae045a",
-      },
-    ],
-    createdAt: "2025-12-30T17:52:50.635Z",
-    updatedAt: "2026-01-05T19:11:36.965Z",
-  };
-
-  const profile = fallbackUser;
-  const roles = Array.isArray(profile.voteInformation)
-    ? profile.voteInformation
-    : [];
-  const primaryRole = roles[0]?.role ?? "Member";
-  const pollsCount = roles.length;
 
   return (
     <main className="min-h-screen overflow-x-hidden bg-white text-slate-900 px-4 py-6 sm:px-6 sm:py-8 lg:px-8 dark:bg-slate-950 dark:text-slate-100">

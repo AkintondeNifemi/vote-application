@@ -21,7 +21,7 @@ export default function SettingsAccessAndRolePage({ user }) {
         </div>
         <div className="rounded-xl border border-gray-200 bg-white px-3 py-3 dark:border-slate-700 dark:bg-slate-900">
           <p className="text-xs uppercase tracking-[0.12em] text-slate-500 dark:text-slate-400">
-            Poll assignments
+            Poll
           </p>
           <p className="text-sm font-semibold text-slate-900 dark:text-white">
             {user?.voteInformation.length > 0

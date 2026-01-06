@@ -15,6 +15,36 @@ const formatDate = (dateString) => {
     minute: "2-digit",
   });
 };
+
+const calculateDaysUntil = (targetDate) => {
+  return Math.ceil((new Date(targetDate) - new Date()) / (1000 * 60 * 60 * 24));
+};
+
+const getPollTimingStatus = (startDate, endDate) => {
+  const now = new Date();
+  const start = new Date(startDate);
+  const end = new Date(endDate);
+
+  if (now < start) {
+    return {
+      label: "Starts In",
+      value: calculateDaysUntil(startDate),
+      status: "upcoming",
+    };
+  } else if (now < end) {
+    return {
+      label: "Days Left",
+      value: calculateDaysUntil(endDate),
+      status: "active",
+    };
+  } else {
+    return {
+      label: "Status",
+      value: "Ended",
+      status: "ended",
+    };
+  }
+};
 export default function PollsIdHeader({ pollData }) {
   const {
     title,
@@ -24,7 +54,11 @@ export default function PollsIdHeader({ pollData }) {
     contestants,
     createdAt,
     completedVoters,
+    startDate,
+    endDate,
   } = pollData;
+
+  const timingStatus = getPollTimingStatus(startDate, endDate);
 
   function calculateCandidate(contestants) {
     let totalCandidate = 0;
@@ -118,20 +152,35 @@ export default function PollsIdHeader({ pollData }) {
             </div>
           </div>
 
-          <div className="bg-white dark:bg-slate-800 rounded-xl p-4 border border-gray-200 dark:border-slate-700">
+          <div
+            className={`bg-white dark:bg-slate-800 rounded-xl p-4 border ${"border-green-200 dark:border-green-700/5 "}`}
+          >
             <div className="flex items-center gap-3">
-              <div className="h-10 w-10 rounded-lg bg-amber-100 dark:bg-amber-900/30 flex items-center justify-center">
-                <Clock className="h-5 w-5 text-amber-600 dark:text-amber-400" />
+              <div
+                className={`h-10 w-10 rounded-lg flex items-center justify-center ${
+                  timingStatus.status === "upcoming"
+                    ? "bg-amber-100 dark:bg-amber-900/30"
+                    : timingStatus.status === "active"
+                    ? "bg-green-100 dark:bg-green-900/30"
+                    : "bg-red-100 dark:bg-red-900/30"
+                }`}
+              >
+                <Clock
+                  className={`h-5 w-5 ${
+                    timingStatus.status === "upcoming"
+                      ? "text-amber-600 dark:text-amber-400"
+                      : timingStatus.status === "active"
+                      ? "text-green-600 dark:text-green-400"
+                      : "text-red-600 dark:text-red-400"
+                  }`}
+                />
               </div>
               <div>
                 <p className="text-xs font-semibold text-gray-600 dark:text-slate-400">
-                  Days Left
+                  {timingStatus.label}
                 </p>
                 <p className="text-2xl font-bold text-gray-900 dark:text-white">
-                  {Math.ceil(
-                    (new Date(pollData.endDate) - new Date()) /
-                      (1000 * 60 * 60 * 24)
-                  )}
+                  {timingStatus.value}
                 </p>
               </div>
             </div>

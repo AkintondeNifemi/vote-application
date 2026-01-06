@@ -49,7 +49,7 @@ export default function PollsIdBody({ poll, pollId, user }) {
         )}
         {activeTab === "candidates" && (
           <div id="candidates">
-            <CandidatesTab poll={poll} pollId={pollId} />
+            <CandidatesTab poll={poll} pollId={pollId} user={user} />
           </div>
         )}
         {activeTab === "vote" && (
@@ -59,12 +59,12 @@ export default function PollsIdBody({ poll, pollId, user }) {
         )}
         {activeTab === "positions" && (
           <div id="positions">
-            <PositionsTab pollId={pollId} />
+            <PositionsTab pollId={pollId} user={user} />
           </div>
         )}
         {activeTab === "voters" && (
           <div id="voters">
-            <VotersTab poll={poll} pollId={pollId} />
+            <VotersTab poll={poll} pollId={pollId} user={user} />
           </div>
         )}
         {activeTab === "settings" && (

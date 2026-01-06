@@ -1,6 +1,17 @@
 /* eslint-disable @next/next/no-img-element */
 import { UserRound } from "lucide-react";
 export default function SettingsProfilePage({ user }) {
+  const toInitials = (name) => {
+    if (!name) return "--";
+    return name
+      .split(" ")
+      .filter(Boolean)
+      .slice(0, 2)
+      .map((part) => part[0]?.toUpperCase())
+      .join("");
+  };
+  const initials = toInitials(user?.name);
+
   return (
     <div className="rounded-3xl border border-gray-200 bg-white p-4 sm:p-5 shadow-md dark:border-slate-700 dark:bg-slate-800 dark:shadow-xl dark:shadow-black/40">
       <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between sm:gap-3">
@@ -19,7 +30,7 @@ export default function SettingsProfilePage({ user }) {
           {user.image ? (
             <img
               src={user?.image}
-              alt={user.name ?? "User avatar"}
+              alt={user?.name ?? "User avatar"}
               className="h-full w-full object-cover"
             />
           ) : (

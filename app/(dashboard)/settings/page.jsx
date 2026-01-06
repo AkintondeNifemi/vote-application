@@ -281,7 +281,7 @@ export default function SettingsPage({ user }) {
                 ].map((item) => (
                   <div
                     key={item.label}
-                    className="rounded-xl border border-gray-200 bg-white px-3 py-3 dark:border-white/10 dark:bg-white/5"
+                    className="rounded-xl border border-gray-200 bg-white px-3 py-3 dark:border-slate-700 dark:bg-slate-900"
                   >
                     <p className="text-xs uppercase tracking-[0.12em] text-slate-500 dark:text-slate-400">
                       {item.label}

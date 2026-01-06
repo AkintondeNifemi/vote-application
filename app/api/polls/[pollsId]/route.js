@@ -28,7 +28,7 @@ export const GET = auth(async function GET(req, { params }) {
     await connectDatabase();
     // check if the poll  exist
     const poll = await Polls.findById(pollsId)
-      .populate("userId", "name email image")
+      .populate("userId", "name email image voteInformation")
       .populate("contestants")
       .populate("voters");
     // if no poll return an error

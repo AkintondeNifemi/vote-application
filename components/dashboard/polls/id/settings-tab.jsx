@@ -20,9 +20,11 @@ const formatDate = (dateString) => {
   });
 };
 
-export default function SettingsTab({ pollData }) {
-  const isOwner = pollData?.role?.some((r) => r.userRole === "Owner");
+export default function SettingsTab({ pollData, user }) {
   const creator = pollData?.userId;
+  const creatorRole = pollData?.role?.find(
+    (r) => r.userId?.toString() === creator?._id?.toString()
+  );
   const votesCount = pollData?.voters?.length || 0;
   const positionsCount = pollData?.contestants?.length || 0;
   const completedVotes = pollData?.completedVoters?.length || 0;
@@ -38,7 +40,6 @@ export default function SettingsTab({ pollData }) {
         </p>
       </div>
 
-      {/* Basic Information */}
       <div className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-200 dark:border-slate-700 p-4 sm:p-6">
         <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-2">
           <Award className="h-5 w-5 text-indigo-600 dark:text-indigo-400" />
@@ -99,7 +100,6 @@ export default function SettingsTab({ pollData }) {
         </div>
       </div>
 
-      {/* Dates */}
       <div className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-200 dark:border-slate-700 p-4 sm:p-6">
         <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-2">
           <Calendar className="h-5 w-5 text-blue-600 dark:text-blue-400" />
@@ -131,7 +131,6 @@ export default function SettingsTab({ pollData }) {
         </div>
       </div>
 
-      {/* Creator & Access */}
       <div className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-200 dark:border-slate-700 p-4 sm:p-6">
         <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-2">
           <Shield className="h-5 w-5 text-purple-600 dark:text-purple-400" />
@@ -158,10 +157,11 @@ export default function SettingsTab({ pollData }) {
                 <Mail className="h-3 w-3" />
                 {creator?.email || "N/A"}
               </p>
-              {isOwner && (
+
+              {creatorRole?.userRole && (
                 <span className="inline-flex items-center gap-1 mt-2 px-2 py-1 bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300 rounded-md text-[10px] font-semibold">
                   <Lock className="h-3 w-3" />
-                  Owner
+                  {creatorRole.userRole}
                 </span>
               )}
             </div>
@@ -169,7 +169,6 @@ export default function SettingsTab({ pollData }) {
         </div>
       </div>
 
-      {/* Voting Rules */}
       <div className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-200 dark:border-slate-700 p-4 sm:p-6">
         <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-2">
           <Lock className="h-5 w-5 text-orange-600 dark:text-orange-400" />
@@ -214,7 +213,6 @@ export default function SettingsTab({ pollData }) {
         </div>
       </div>
 
-      {/* Statistics */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <div className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-200 dark:border-slate-700 p-4">
           <div className="flex items-center gap-3">
@@ -265,8 +263,7 @@ export default function SettingsTab({ pollData }) {
         </div>
       </div>
 
-      {/* Danger Zone */}
-      {isOwner && (
+      {(user?.role === "Owner" || user?.role === "Admin") && (
         <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800/50 rounded-2xl p-4 sm:p-6">
           <h3 className="text-lg font-bold text-red-900 dark:text-red-300 mb-2 flex items-center gap-2">
             <Trash2 className="h-5 w-5" />

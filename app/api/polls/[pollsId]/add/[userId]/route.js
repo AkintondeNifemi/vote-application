@@ -2,9 +2,18 @@ import { NextResponse } from "next/server";
 import { connectDatabase } from "@/libs/connectdatabase";
 import User from "@/libs/models/user.models";
 import Polls from "@/libs/models/polls.models";
+import { auth } from "@/auth";
 
-export async function PUT(req, { params }) {
-  const { userId: authorizationUserId } = await req.json();
+export const PUT = auth(async function PUT(req, { params }) {
+  if (!req.auth || !req.auth.user) {
+    return NextResponse.json(
+      { error: "Unauthorized Access" },
+      {
+        status: 400,
+      }
+    );
+  }
+  const authorizationUserId = req?.auth?.user?.id;
   const { pollsId, userId } = await params;
   // check if no user authorizationUserId exist
   if (!authorizationUserId) {
@@ -48,6 +57,7 @@ export async function PUT(req, { params }) {
     }
     // check if user adding him exist
     const authorizationUser = await User.findById(authorizationUserId);
+
     if (!authorizationUser) {
       return NextResponse.json(
         { error: "Invalid Parameters" },
@@ -62,7 +72,6 @@ export async function PUT(req, { params }) {
         return info.pollId.toString() === pollsId.toString();
       }
     );
-
     if (!authorizationUserVoteInfo) {
       return NextResponse.json(
         { error: "User doesnt have access to this poll" },
@@ -124,4 +133,4 @@ export async function PUT(req, { params }) {
       }
     );
   }
-}
+});

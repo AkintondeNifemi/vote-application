@@ -72,7 +72,7 @@ export default function VotersTab({ poll, pollId, user }) {
         <h2 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white">
           Manage Voters
         </h2>
-        <VotersAddButton />
+        <VotersAddButton pollId={pollId} />
       </div>
 
       <div className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-200 dark:border-slate-700 overflow-hidden">
@@ -134,7 +134,7 @@ export default function VotersTab({ poll, pollId, user }) {
                       <div className="flex items-center justify-end gap-2">
                         <button
                           onClick={() => handleRemoveVoter(voter._id)}
-                          className="p-2 hover:bg-gray-100 dark:hover:bg-slate-700 rounded-lg transition-colors"
+                          className="p-2 hover:bg-gray-100 cursor-pointer dark:hover:bg-slate-700 rounded-lg transition-colors"
                         >
                           <Trash2 className="h-4 w-4 text-gray-600 dark:text-slate-400" />
                         </button>

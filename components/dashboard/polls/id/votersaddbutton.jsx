@@ -2,24 +2,39 @@
 
 import { useState } from "react";
 import { Plus, X } from "lucide-react";
+import { toast } from "react-toastify";
 
 export default function VotersAddButton({ pollId }) {
   const [open, setOpen] = useState(false);
   const [userId, setUserId] = useState("");
-  const [error, setError] = useState("");
 
   function closeModal() {
     setOpen(false);
     setUserId("");
-    setError("");
   }
 
   async function handleSubmit() {
     if (!userId.trim()) {
-      return setError("User ID is required");
+      return toast.error("User ID is required");
     }
-    setError("");
-    closeModal();
+    try {
+      const request = await fetch(`/api/polls/${pollId}/add/${userId}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+      });
+      const response = await request.json();
+      if (!request?.ok || response?.error) {
+        return toast.error(response?.error || "An unexpected error occurred.");
+      }
+      toast.success(response?.message);
+      closeModal();
+    } catch (err) {
+      console.log(err);
+      return toast.error("Network Error");
+    }
   }
 
   return (
@@ -67,11 +82,6 @@ export default function VotersAddButton({ pollId }) {
                 className="w-full px-4 py-3 border border-gray-300 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800 text-gray-900 dark:text-white shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 placeholder="e.g. 69541172141b7f27d67277d6"
               />
-              {error && (
-                <p className="text-xs text-red-600 dark:text-red-400 mt-1">
-                  {error}
-                </p>
-              )}
             </div>
 
             <div className="mt-6 flex flex-col sm:flex-row sm:justify-end gap-3 w-full">

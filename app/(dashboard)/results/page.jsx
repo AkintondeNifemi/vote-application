@@ -1,7 +1,19 @@
 import ResultCard from "@/components/dashboard/results/resultcard";
 import { TrendingUp } from "lucide-react";
+import { BASE_URL } from "@/libs/config/configuration";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
-export default function ResultsPage() {
+export default async function ResultsPage() {
+  const request = await fetch(`${BASE_URL}/api/polls`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Cookie: (await cookies()).toString(),
+    },
+  });
+  const response = await request.json();
+  if (!request?.ok || response?.error) return redirect("/dashboard");
   // Static sample data
   const polls = [
     {

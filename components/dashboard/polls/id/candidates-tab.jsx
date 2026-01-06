@@ -4,7 +4,7 @@ import { Plus, Users, Mail, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
-export default function CandidatesTab({ poll, pollId }) {
+export default function CandidatesTab({ poll, pollId, user }) {
   const voters = poll?.voters || [];
   const [candidates, setCandidate] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -16,6 +16,9 @@ export default function CandidatesTab({ poll, pollId }) {
   // Get positions from poll
   const positions = poll?.contestants || [];
   useEffect(() => {
+    if (user?.poll?.role !== "Owner" && user?.poll?.role !== "Admin") {
+      window.location.href = `/polls/${pollId}`;
+    }
     async function fetchCandidates() {
       setLoading(true);
       try {
@@ -45,7 +48,7 @@ export default function CandidatesTab({ poll, pollId }) {
       }
     }
     fetchCandidates();
-  }, [pollId]);
+  }, [pollId, user]);
 
   if (loading) return <LoadingSpinner />;
   async function setupCandidate() {

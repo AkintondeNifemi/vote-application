@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import { UserRound } from "lucide-react";
-export default function SettingsProfilePage({}) {
+export default function SettingsProfilePage({ user }) {
   return (
     <div className="rounded-3xl border border-gray-200 bg-white p-4 sm:p-5 shadow-md dark:border-slate-700 dark:bg-slate-800 dark:shadow-xl dark:shadow-black/40">
       <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between sm:gap-3">
@@ -16,10 +16,10 @@ export default function SettingsProfilePage({}) {
       </div>
       <div className="mt-4 flex flex-wrap items-center gap-3">
         <div className="grid h-16 w-16 place-items-center overflow-hidden rounded-full bg-slate-200 text-lg font-semibold text-slate-800 dark:bg-slate-700 dark:text-white">
-          {profile.image ? (
+          {user.image ? (
             <img
-              src={profile.image}
-              alt={profile.name ?? "User avatar"}
+              src={user?.image}
+              alt={user.name ?? "User avatar"}
               className="h-full w-full object-cover"
             />
           ) : (
@@ -31,7 +31,7 @@ export default function SettingsProfilePage({}) {
             Display name
           </p>
           <p className="truncate text-base font-semibold text-slate-900 dark:text-white">
-            {profile.name || "Not provided"}
+            {user?.name || "Not provided"}
           </p>
           <p className="text-xs text-slate-500">Shown on your public votes</p>
         </div>

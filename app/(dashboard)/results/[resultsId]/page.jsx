@@ -21,14 +21,14 @@ export default async function Page({ params }) {
     <main className="min-h-screen bg-gray-50 dark:bg-slate-950">
       <ResultHeader poll={poll} />
 
-      {/* <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
         <div className="space-y-6">
           <h2 className="text-2xl text-center font-bold text-gray-900 dark:text-white">
             Position Results
           </h2>
           <ResultPosition poll={poll} />
         </div>
-      </div> */}
+      </div>
     </main>
   );
 }

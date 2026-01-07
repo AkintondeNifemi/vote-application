@@ -13,6 +13,9 @@ export default function ResultPosition({ poll }) {
           return { ...c, user: getUserInfo(c.userId) };
         });
 
+        // Handle empty candidate list
+        const hasCandidates = candidate && candidate.length > 0;
+
         return (
           <div
             key={position._id}
@@ -65,82 +68,99 @@ export default function ResultPosition({ poll }) {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200 dark:divide-slate-700">
-                  {candidate.map((candidate, index) => {
-                    const percentage =
-                      position?.voters?.length > 0
-                        ? ((candidate.votes || 0) / position?.voters?.length) *
-                          100
-                        : 0;
-                    const isWinner = index === 0;
-
-                    return (
-                      <tr
-                        key={candidate._id}
-                        className={
-                          "bg-white dark:bg-slate-800 hover:bg-gray-50 dark:hover:bg-slate-700/50 transition-colors"
-                        }
+                  {!hasCandidates ? (
+                    <tr>
+                      <td
+                        colSpan="6"
+                        className="px-6 py-12 text-center text-gray-500 dark:text-slate-400"
                       >
-                        <td className="px-6 py-4 whitespace-nowrap">
-                          <div className="flex items-center">
-                            {isWinner ? (
-                              <div className="flex items-center gap-2">
-                                <span className="text-2xl">🏆</span>
-                                <span className="text-sm font-bold text-amber-600 dark:text-amber-400">
-                                  #1
+                        <div className="flex flex-col items-center gap-2">
+                          <Users className="h-12 w-12 text-gray-300 dark:text-slate-600" />
+                          <p className="text-sm font-medium">
+                            No candidates for this position
+                          </p>
+                        </div>
+                      </td>
+                    </tr>
+                  ) : (
+                    candidate.map((candidate, index) => {
+                      const percentage =
+                        position?.voters?.length > 0
+                          ? ((candidate.votes || 0) /
+                              position?.voters?.length) *
+                            100
+                          : 0;
+                      const isWinner = index === 0;
+
+                      return (
+                        <tr
+                          key={candidate._id}
+                          className={
+                            "bg-white dark:bg-slate-800 hover:bg-gray-50 dark:hover:bg-slate-700/50 transition-colors"
+                          }
+                        >
+                          <td className="px-6 py-4 whitespace-nowrap">
+                            <div className="flex items-center">
+                              {isWinner ? (
+                                <div className="flex items-center gap-2">
+                                  <span className="text-2xl">🏆</span>
+                                  <span className="text-sm font-bold text-amber-600 dark:text-amber-400">
+                                    #1
+                                  </span>
+                                </div>
+                              ) : (
+                                <span className="text-sm font-semibold text-gray-700 dark:text-slate-300">
+                                  #{index + 1}
                                 </span>
-                              </div>
-                            ) : (
-                              <span className="text-sm font-semibold text-gray-700 dark:text-slate-300">
-                                #{index + 1}
-                              </span>
-                            )}
-                          </div>
-                        </td>
-
-                        <td className="px-6 py-4 whitespace-nowrap">
-                          <div className="text-sm font-semibold text-gray-900 dark:text-white">
-                            {candidate?.user?.name}
-                          </div>
-                        </td>
-
-                        <td className="px-6 py-4">
-                          <div className="text-sm text-gray-600 dark:text-slate-400 truncate max-w-xs">
-                            {candidate?.user?.email}
-                          </div>
-                        </td>
-
-                        <td className="px-6 py-4 whitespace-nowrap text-right">
-                          <div className="text-lg font-bold text-gray-900 dark:text-white">
-                            {candidate?.votes}
-                          </div>
-                        </td>
-
-                        <td className="px-6 py-4 whitespace-nowrap text-right">
-                          <div
-                            className={`text-sm font-semibold ${
-                              isWinner
-                                ? "text-amber-600 dark:text-amber-400"
-                                : "text-gray-600 dark:text-slate-400"
-                            }`}
-                          >
-                            {percentage?.toFixed(1)}%
-                          </div>
-                        </td>
-
-                        <td className="px-6 py-4">
-                          <div className="w-32">
-                            <div className="h-2 bg-gray-200 dark:bg-slate-700 rounded-sm overflow-hidden">
-                              <div
-                                className={`h-full bg-indigo-600 dark:bg-indigo-500"
-                                }`}
-                                style={{ width: `${percentage}%` }}
-                              />
+                              )}
                             </div>
-                          </div>
-                        </td>
-                      </tr>
-                    );
-                  })}
+                          </td>
+
+                          <td className="px-6 py-4 whitespace-nowrap">
+                            <div className="text-sm font-semibold text-gray-900 dark:text-white">
+                              {candidate?.user?.name}
+                            </div>
+                          </td>
+
+                          <td className="px-6 py-4">
+                            <div className="text-sm text-gray-600 dark:text-slate-400 truncate max-w-xs">
+                              {candidate?.user?.email}
+                            </div>
+                          </td>
+
+                          <td className="px-6 py-4 whitespace-nowrap text-right">
+                            <div className="text-lg font-bold text-gray-900 dark:text-white">
+                              {candidate?.votes}
+                            </div>
+                          </td>
+
+                          <td className="px-6 py-4 whitespace-nowrap text-right">
+                            <div
+                              className={`text-sm font-semibold ${
+                                isWinner
+                                  ? "text-amber-600 dark:text-amber-400"
+                                  : "text-gray-600 dark:text-slate-400"
+                              }`}
+                            >
+                              {percentage?.toFixed(1)}%
+                            </div>
+                          </td>
+
+                          <td className="px-6 py-4">
+                            <div className="w-32">
+                              <div className="h-2 bg-gray-200 dark:bg-slate-700 rounded-sm overflow-hidden">
+                                <div
+                                  className={`h-full bg-indigo-600 dark:bg-indigo-500"
+                                }`}
+                                  style={{ width: `${percentage}%` }}
+                                />
+                              </div>
+                            </div>
+                          </td>
+                        </tr>
+                      );
+                    })
+                  )}
                 </tbody>
               </table>
             </div>

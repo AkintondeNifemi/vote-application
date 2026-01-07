@@ -16,17 +16,26 @@ export default function ResultPosition({ poll }) {
         return (
           <div
             key={position._id}
-            className="bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-sm border border-gray-100 dark:border-slate-700"
+            className="bg-white dark:bg-slate-800 rounded-lg overflow-hidden border border-gray-200 dark:border-slate-700"
           >
             {/* Header */}
-            <div className="bg-linear-to-r from-indigo-600 to-blue-600 p-6 text-white">
-              <h3 className="text-2xl font-bold mb-1 capitalize">
-                {position.position}
-              </h3>
-              <p className="text-indigo-100">{position.description}</p>
-              <div className="mt-4 flex items-center gap-2 text-sm">
-                <Users className="h-4 w-4" />
-                <span>Total Votes: {totalVotes}</span>
+            <div className="bg-gray-50 dark:bg-slate-900 px-6 py-5 border-b border-gray-200 dark:border-slate-700">
+              <div className="flex items-start justify-between gap-4">
+                <div className="flex-1">
+                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-1 capitalize">
+                    {position.position}
+                  </h3>
+                  <p className="text-sm text-gray-600 dark:text-slate-400">
+                    {position.description}
+                  </p>
+                </div>
+                <div className="flex items-center gap-2 text-sm text-gray-700 dark:text-slate-300 bg-white dark:bg-slate-800 px-3 py-2 rounded-md border border-gray-200 dark:border-slate-700">
+                  <Users className="h-4 w-4" />
+                  <span className="font-semibold">{totalVotes}</span>
+                  <span className="text-gray-500 dark:text-slate-400">
+                    votes
+                  </span>
+                </div>
               </div>
             </div>
 
@@ -127,9 +136,13 @@ export default function ResultPosition({ poll }) {
                         {/* Progress Bar */}
                         <td className="px-6 py-4">
                           <div className="w-32">
-                            <div className="h-2 bg-gray-200 dark:bg-slate-700 rounded-full overflow-hidden">
+                            <div className="h-2 bg-gray-200 dark:bg-slate-700 rounded-sm overflow-hidden">
                               <div
-                                className={`h-full ${"bg-linear-to-r from-amber-400 to-orange-500"}`}
+                                className={`h-full ${
+                                  isWinner
+                                    ? "bg-amber-600 dark:bg-amber-500"
+                                    : "bg-indigo-600 dark:bg-indigo-500"
+                                }`}
                                 style={{ width: `${percentage}%` }}
                               />
                             </div>

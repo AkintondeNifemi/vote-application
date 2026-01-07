@@ -20,8 +20,17 @@ export default function ResultHeader({ poll }) {
                   : "Completed"}
               </span>
               <span className="text-sm text-gray-600 dark:text-slate-400">
-                {new Date(poll.startDate).toLocaleDateString()} -{" "}
-                {new Date(poll.endDate).toLocaleDateString()}
+                {new Date(poll.startDate).toLocaleDateString("en-US", {
+                  day: "2-digit",
+                  month: "short",
+                  year: "numeric",
+                })}{" "}
+                -{" "}
+                {new Date(poll.endDate).toLocaleDateString("en-US", {
+                  day: "2-digit",
+                  month: "short",
+                  year: "numeric",
+                })}
               </span>
             </div>
             <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mb-2">

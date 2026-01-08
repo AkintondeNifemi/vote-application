@@ -91,6 +91,7 @@ export default function PositionsTab({ pollId, user }) {
         return toast.error(response?.error || "An error occurred.");
       }
       toast.success(response?.message || "Position Successfully created!");
+      handleCloseModal();
       window.location.reload();
     } catch (err) {
       console.log(err);

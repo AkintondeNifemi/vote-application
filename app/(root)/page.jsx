@@ -57,7 +57,7 @@ export default function Home() {
               {
                 num: "02",
                 title: "Share",
-                desc: "Invite participants via link, QR, or email",
+                desc: "Invite participants via link, QR, Whatsapp or email",
                 icon: "🔗",
               },
               {
@@ -80,11 +80,6 @@ export default function Home() {
                     {step.desc}
                   </p>
                 </div>
-                {idx < 2 && (
-                  <div className="hidden sm:flex absolute top-1/2 -right-4 transform -translate-y-1/2 text-zinc-300 dark:text-zinc-700">
-                    <ArrowRight className="w-6 h-6" />
-                  </div>
-                )}
               </div>
             ))}
           </div>
@@ -104,11 +99,11 @@ export default function Home() {
             {[
               {
                 q: "Is voting truly anonymous?",
-                a: "Yes. We separate voter identity from vote data using industry-standard encryption. Only aggregate results are visible.",
+                a: "Yes. We separate voter identity from vote data. Only aggregate results are visible.",
               },
               {
-                q: "Can I edit results after voting closes?",
-                a: "No. Once a poll closes, results are locked and immutable. You can view historical data anytime.",
+                q: "Can I edit results after voting?",
+                a: "No. Once you vote, results are locked and immutable. You can view historical data anytime.",
               },
               {
                 q: "What happens to my data?",
@@ -116,11 +111,11 @@ export default function Home() {
               },
               {
                 q: "Does Ballot Right work offline?",
-                a: "Polls must be created and voted on with an internet connection, but results sync automatically once reconnected.",
+                a: "No. An internet connection is required to create polls, cast votes, and view results in real-time.",
               },
               {
                 q: "How many people can vote?",
-                a: "Starter plan supports 100 voters, Pro supports 10k, and Enterprise supports unlimited participants.",
+                a: "For now, each poll can accommodate up to 10,000 voters. We're working on increasing this limit in future updates.",
               },
             ].map((item, idx) => (
               <details

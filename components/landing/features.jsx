@@ -32,21 +32,15 @@ export default function FeatureSection() {
           },
           {
             icon: Shield,
-            title: "Bank-level Security",
+            title: "Google-level Security",
             description:
-              "Enterprise-grade encryption ensures every vote stays private and authentic",
+              "Google-grade encryption ensures every vote stays private and authentic",
           },
           {
             icon: Users,
             title: "Easy Collaboration",
             description:
               "Share polls instantly via link, QR code, or email to get responses fast",
-          },
-          {
-            icon: BarChart3,
-            title: "Advanced Insights",
-            description:
-              "Export detailed reports and understand voting patterns with smart analytics",
           },
           {
             icon: Globe,

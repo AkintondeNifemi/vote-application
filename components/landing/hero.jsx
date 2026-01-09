@@ -46,62 +46,10 @@ export default function HeroSection() {
 
               <div className="space-y-4 sm:space-y-6">
                 <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
-                  <button className="group relative px-6 sm:px-8 py-3 sm:py-4 bg-linear-to-r from-blue-600 to-cyan-600 dark:from-blue-500 dark:to-cyan-500 text-white rounded-xl sm:rounded-2xl font-bold text-base sm:text-lg shadow-xl shadow-blue-600/30 hover:shadow-2xl hover:shadow-blue-600/50 hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2 sm:gap-3">
-                    Start Voting Free
+                  <button className="group cursor-pointer relative px-6 sm:px-8 py-3 sm:py-4 bg-linear-to-r from-blue-600 to-cyan-600 dark:from-blue-500 dark:to-cyan-500 text-white rounded-xl sm:rounded-2xl font-bold text-base sm:text-lg shadow-xl shadow-blue-600/30 hover:shadow-2xl hover:shadow-blue-600/50 hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2 sm:gap-3">
+                    Start Voting
                     <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform" />
                   </button>
-                  <button className="group px-6 sm:px-8 py-3 sm:py-4 bg-white/80 dark:bg-zinc-800/80 backdrop-blur-sm text-zinc-900 dark:text-zinc-100 rounded-xl sm:rounded-2xl font-bold text-base sm:text-lg border-2 border-zinc-200 dark:border-zinc-700 hover:border-blue-600 dark:hover:border-blue-500 hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2 sm:gap-3">
-                    <Play className="w-5 h-5" />
-                    See it in action
-                  </button>
-                </div>
-
-                <div className="flex flex-wrap items-center gap-4 sm:gap-6 lg:gap-8 pt-3 sm:pt-4">
-                  <div className="flex items-center gap-1.5 sm:gap-2">
-                    <CheckCircle2 className="w-4 sm:w-5 h-4 sm:h-5 text-green-600 dark:text-green-400 shrink-0" />
-                    <span className="text-xs sm:text-sm font-medium text-zinc-700 dark:text-zinc-300 whitespace-nowrap">
-                      Free forever
-                    </span>
-                  </div>
-                  <div className="flex items-center gap-1.5 sm:gap-2">
-                    <CheckCircle2 className="w-4 sm:w-5 h-4 sm:h-5 text-green-600 dark:text-green-400 shrink-0" />
-                    <span className="text-xs sm:text-sm font-medium text-zinc-700 dark:text-zinc-300 whitespace-nowrap">
-                      No credit card
-                    </span>
-                  </div>
-                  <div className="flex items-center gap-1.5 sm:gap-2">
-                    <CheckCircle2 className="w-4 sm:w-5 h-4 sm:h-5 text-green-600 dark:text-green-400 shrink-0" />
-                    <span className="text-xs sm:text-sm font-medium text-zinc-700 dark:text-zinc-300 whitespace-nowrap">
-                      2-min setup
-                    </span>
-                  </div>
-                </div>
-              </div>
-
-              <div className="grid grid-cols-3 gap-4 sm:gap-6 pt-4 sm:pt-6 border-t border-zinc-200 dark:border-zinc-800">
-                <div className="text-center sm:text-left">
-                  <div className="text-2xl sm:text-3xl font-black text-zinc-900 dark:text-zinc-100">
-                    100k+
-                  </div>
-                  <div className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400">
-                    Active Users
-                  </div>
-                </div>
-                <div className="text-center sm:text-left border-l border-zinc-200 dark:border-zinc-800 pl-4 sm:pl-6">
-                  <div className="text-2xl sm:text-3xl font-black text-zinc-900 dark:text-zinc-100">
-                    5M+
-                  </div>
-                  <div className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400">
-                    Votes Cast
-                  </div>
-                </div>
-                <div className="text-center sm:text-left border-l border-zinc-200 dark:border-zinc-800 pl-4 sm:pl-6">
-                  <div className="text-2xl sm:text-3xl font-black text-zinc-900 dark:text-zinc-100">
-                    99.9%
-                  </div>
-                  <div className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400">
-                    Uptime
-                  </div>
                 </div>
               </div>
             </div>

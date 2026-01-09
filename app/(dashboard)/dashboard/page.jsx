@@ -1,5 +1,29 @@
+"use client";
 import { BarChart3, FileText, PlusCircle } from "lucide-react";
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+} from "recharts";
+import { useState } from "react";
+
+const pollData = [
+  { day: "Mon", active: 120, completed: 85 },
+  { day: "Tue", active: 150, completed: 110 },
+  { day: "Wed", active: 98, completed: 75 },
+  { day: "Thu", active: 140, completed: 105 },
+  { day: "Fri", active: 165, completed: 130 },
+  { day: "Sat", active: 95, completed: 60 },
+  { day: "Sun", active: 125, completed: 90 },
+];
+
 export default function Page() {
+  const [period, setPeriod] = useState("Week");
   return (
     <main className="p-4 sm:p-6 lg:p-8">
       <div className="mb-6">
@@ -80,29 +104,75 @@ export default function Page() {
 
       {/* Recent Activity */}
       <div className="mt-8 rounded-xl bg-white dark:bg-gray-800 p-6 shadow-sm border border-gray-100 dark:border-gray-700">
-        <h2 className="mb-4 text-lg font-semibold text-gray-800 dark:text-white">
-          Recent Polls
-        </h2>
-        <div className="space-y-4">
-          {[1, 2, 3].map((item) => (
-            <div
-              key={item}
-              className="flex items-center justify-between border-b border-gray-200 dark:border-gray-700 pb-4 last:border-b-0"
-            >
-              <div>
-                <h3 className="font-medium text-gray-800 dark:text-white">
-                  Poll Title {item}
-                </h3>
-                <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
-                  Created 2 days ago • 45 votes
-                </p>
-              </div>
-              <button className="rounded-lg bg-indigo-600 dark:bg-indigo-500 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700 dark:hover:bg-indigo-600">
-                View Results
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
+          <h2 className="text-lg font-semibold text-gray-800 dark:text-white">
+            Activity Statistics
+          </h2>
+          <div className="flex gap-2">
+            {["Week", "Month", "Year"].map((p) => (
+              <button
+                key={p}
+                onClick={() => setPeriod(p)}
+                className={`px-3 py-1 rounded-lg text-sm font-medium transition-colors ${
+                  period === p
+                    ? "bg-indigo-100 dark:bg-indigo-900/40 text-indigo-700 dark:text-indigo-300"
+                    : "bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-600"
+                }`}
+              >
+                {p}
               </button>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
+
+        {/* Bar Chart - Works on all devices */}
+        <ResponsiveContainer width="100%" height={400}>
+          <BarChart
+            data={pollData}
+            margin={{ top: 20, right: 30, left: 0, bottom: 5 }}
+          >
+            <CartesianGrid
+              strokeDasharray="3 3"
+              stroke="#e5e7eb"
+              opacity={0.5}
+            />
+            <XAxis
+              dataKey="day"
+              stroke="#9ca3af"
+              style={{ fontSize: "14px" }}
+            />
+            <YAxis stroke="#9ca3af" style={{ fontSize: "14px" }} />
+            <Tooltip
+              contentStyle={{
+                backgroundColor: "#1f2937",
+                border: "1px solid #374151",
+                borderRadius: "0.75rem",
+                color: "#fff",
+                padding: "12px",
+              }}
+              cursor={{ fill: "rgba(79, 70, 229, 0.1)" }}
+            />
+            <Legend
+              wrapperStyle={{
+                paddingTop: "20px",
+                fontSize: "14px",
+              }}
+              iconType="square"
+            />
+            <Bar
+              dataKey="active"
+              fill="#4f46e5"
+              radius={[8, 8, 0, 0]}
+              name="Active Polls"
+            />
+            <Bar
+              dataKey="completed"
+              fill="#60a5fa"
+              radius={[8, 8, 0, 0]}
+              name="Completed Polls"
+            />
+          </BarChart>
+        </ResponsiveContainer>
       </div>
     </main>
   );

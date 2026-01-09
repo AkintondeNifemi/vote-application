@@ -6,10 +6,10 @@ export default function Footer() {
           <div className="sm:col-span-1">
             <div className="flex items-center gap-2 mb-4">
               <div className="w-8 h-8 rounded-lg bg-blue-600 dark:bg-blue-600 text-white flex items-center justify-center text-sm font-bold">
-                V
+                B
               </div>
               <span className="font-bold text-zinc-900 dark:text-zinc-100">
-                Votely
+                Ballot Right
               </span>
             </div>
             <p className="text-sm text-zinc-600 dark:text-zinc-300 leading-relaxed">
@@ -136,8 +136,8 @@ export default function Footer() {
         </div>
         <div className="border-t border-zinc-200 dark:border-zinc-700 pt-8">
           <p className="text-sm text-zinc-600 dark:text-zinc-300 text-center">
-            &copy; {new Date().getFullYear()} Votely. All rights reserved. Made
-            with precision.
+            &copy; {new Date().getFullYear()} Ballot Right. All rights reserved.
+            Made with precision.
           </p>
         </div>
       </div>

@@ -115,7 +115,7 @@ export default function Home() {
                 a: "Your data is encrypted end-to-end and stored securely. We never sell or share your information with third parties.",
               },
               {
-                q: "Does Votely work offline?",
+                q: "Does Ballot Right work offline?",
                 a: "Polls must be created and voted on with an internet connection, but results sync automatically once reconnected.",
               },
               {
@@ -146,8 +146,8 @@ export default function Home() {
             Ready to decide better?
           </h2>
           <p className="text-xl text-blue-100 dark:text-blue-200 mb-10 max-w-2xl mx-auto leading-relaxed">
-            Join thousands of teams making faster, smarter decisions with
-            Votely.
+            Join thousands of teams making faster, smarter decisions with Ballot
+            Right.
           </p>
           <button className="rounded-lg bg-white dark:bg-zinc-100 text-blue-600 dark:text-blue-600 px-10 py-4 text-lg font-bold hover:bg-blue-50 dark:hover:bg-white transition shadow-lg hover:shadow-xl inline-flex items-center gap-2">
             Start Free Now

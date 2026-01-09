@@ -13,7 +13,7 @@ export default function Navbar() {
           </div>
           <div className="hidden sm:block leading-tight">
             <p className="text-sm font-bold text-zinc-900 dark:text-zinc-100">
-              Votely
+              Ballot Right
             </p>
             <p className="text-xs text-zinc-500 dark:text-zinc-400">
               Decisions made clear

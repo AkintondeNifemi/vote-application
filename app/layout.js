@@ -14,8 +14,12 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Votely",
-  description: "Decisions made clear",
+  title: {
+    default: "Ballot Right",
+    template: "%s | Ballot Right",
+  },
+  description: "Voting Done Right.",
+  keywords: ["Vote", "Voting", "Ballot", "Balloting", "Poll", "Polls", "Right"],
 };
 
 export default async function RootLayout({ children }) {

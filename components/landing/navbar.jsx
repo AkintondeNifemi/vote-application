@@ -9,14 +9,14 @@ export default function Navbar() {
       <div className="border border-zinc-200 dark:border-zinc-700 bg-white/80 dark:bg-zinc-800/80 backdrop-blur-md rounded-2xl shadow-lg max-w-5xl mx-auto px-6 sm:px-8 py-3.5 flex items-center justify-between w-full">
         <div className="flex items-center gap-3 min-w-0">
           <div className="flex h-9 w-9 items-center justify-center shrink-0 rounded-lg bg-linear-to-br from-blue-600 to-blue-700 text-base font-bold text-white">
-            V
+            BR
           </div>
           <div className="hidden sm:block leading-tight">
             <p className="text-sm font-serif font-bold text-zinc-900 dark:text-zinc-100">
               Ballot Right
             </p>
             <p className="text-xs text-zinc-500 dark:text-zinc-400">
-              Decisions made clear
+              Voting Done Right.
             </p>
           </div>
         </div>

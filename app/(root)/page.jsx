@@ -145,12 +145,9 @@ export default function Home() {
             Right.
           </p>
           <button className="rounded-lg bg-white dark:bg-zinc-100 text-blue-600 dark:text-blue-600 px-10 py-4 text-lg font-bold hover:bg-blue-50 dark:hover:bg-white transition shadow-lg hover:shadow-xl inline-flex items-center gap-2">
-            Start Free Now
+            Start Now
             <ArrowRight className="w-5 h-5" />
           </button>
-          <p className="text-blue-100 dark:text-blue-200 text-sm mt-6">
-            No credit card required. Start with 100 voters free.
-          </p>
         </section>
       </main>
     </>

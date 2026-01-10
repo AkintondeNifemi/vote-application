@@ -73,6 +73,7 @@ export const PUT = async function PUT(req) {
   }
 
   try {
+    await connectDatabase();
     return NextResponse.json(
       { message: "Successfully updated user profile" },
       {

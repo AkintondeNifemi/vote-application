@@ -74,6 +74,16 @@ export const PUT = async function PUT(req) {
 
   try {
     await connectDatabase();
+    // check if the user exist
+    const user = await User.findById(userId);
+    if (!user) {
+      return NextResponse.json(
+        { error: "User does not exist" },
+        {
+          status: 400,
+        }
+      );
+    }
     return NextResponse.json(
       { message: "Successfully updated user profile" },
       {

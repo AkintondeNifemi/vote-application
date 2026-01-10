@@ -41,3 +41,5 @@ export const GET = auth(async function GET(req) {
     );
   }
 });
+
+export const PUT = async function PUT(){}

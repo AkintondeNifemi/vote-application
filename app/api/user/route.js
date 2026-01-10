@@ -42,6 +42,41 @@ export const GET = auth(async function GET(req) {
   }
 });
 
-export const PUT = async function PUT(){
-  return NextResponse.json({message:"Successfully updated user profile"});
-}
+export const PUT = async function PUT(req) {
+  const { faculty, department } = await req.json();
+  // faculty is present
+  if (faculty && faculty.length < 5) {
+    return NextResponse.json(
+      { error: "Faculty cant be less than 5 characters long" },
+      {
+        status: 400,
+      }
+    );
+  }
+  // department is present
+  if (department && department.length < 5) {
+    return NextResponse.json(
+      { error: "Department cannot be less than 5 characters long" },
+      {
+        status: 400,
+      }
+    );
+  }
+
+  try {
+    return NextResponse.json(
+      { message: "Successfully updated user profile" },
+      {
+        status: 200,
+      }
+    );
+  } catch (err) {
+    console.log(err);
+    return NextResponse.json(
+      { error: "An error occurred while updating user information" },
+      {
+        status: 400,
+      }
+    );
+  }
+};

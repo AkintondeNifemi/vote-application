@@ -44,7 +44,7 @@ export const GET = auth(async function GET(req) {
 
 export const PUT = async function PUT(req) {
   const { faculty, department, userId } = await req.json();
-  // if no userId
+  // if no user Id
   if (!userId) {
     return NextResponse.json(
       { error: "Unauthorized Access" },

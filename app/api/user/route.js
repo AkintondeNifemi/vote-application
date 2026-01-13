@@ -87,11 +87,11 @@ export const PUT = async function PUT(req) {
     }
     // edit the user department and faculty
     let editing = false;
-    if (faculty.trim() && faculty.trim() === user?.faculty.trim()) {
+    if (faculty?.trim() && faculty?.trim() !== user?.faculty?.trim()) {
       user.faculty = faculty;
       editing = true;
     }
-    if (department.trim() && department.trim() === user?.department.trim()) {
+    if (department?.trim() && department?.trim() !== user?.department?.trim()) {
       user.department = department;
       editing = true;
     }

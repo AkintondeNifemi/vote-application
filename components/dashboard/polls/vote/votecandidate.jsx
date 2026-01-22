@@ -11,6 +11,8 @@ export default function VoteCandidate({
   pollId,
   voteId,
 }) {
+  console.log(candidates);
+
   const [selectedCandidate, setSelectedCandidate] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -41,7 +43,7 @@ export default function VoteCandidate({
             "Content-Type": "application/json",
           },
           credentials: "include",
-        }
+        },
       );
       const response = await request.json();
       if (!request?.ok || response?.error) {
@@ -121,10 +123,10 @@ export default function VoteCandidate({
                       </div>
                       <div className="rounded-lg border border-gray-200 dark:border-slate-800 px-3 py-2 bg-white dark:bg-slate-900/80">
                         <p className="text-xs font-semibold text-gray-500 dark:text-slate-400">
-                          Votes
+                          Departements
                         </p>
-                        <p className="text-base font-semibold text-gray-900 dark:text-white">
-                          {candidate?.votes ?? 0}
+                        <p className="text-base truncate font-semibold text-gray-900 dark:text-white">
+                          {candidate?.userId?.department || "Not Specified"}
                         </p>
                       </div>
                     </div>

@@ -38,8 +38,6 @@ export default function ResultIdContainer({ poll: polls, pollId }) {
     alert("PDF export coming soon!");
   };
 
-  console.log("Poll Data:", poll);
-
   return (
     <>
       <div className="no-print">

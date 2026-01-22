@@ -14,7 +14,7 @@ export default async function VotingPage({ params }) {
         "Content-Type": "application/json",
         Cookie: (await cookies()).toString(),
       },
-    }
+    },
   );
   const response = await request.json();
   if (!request?.ok || response?.error) return redirect(`/polls/${pollsId}`);
@@ -106,23 +106,12 @@ export default async function VotingPage({ params }) {
         </div>
       </div>
 
-      <div className="max-w-5xl mx-auto px-6 py-6">
-        <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800/50 rounded-xl p-4 flex items-start gap-3">
-          <Info className="h-5 w-5 text-blue-600 dark:text-blue-400 shrink-0 mt-0.5" />
-          <div>
-            <p className="text-sm font-semibold text-blue-900 dark:text-blue-300 mb-1">
-              Confidential Voting
-            </p>
-            <p className="text-sm text-blue-800 dark:text-blue-200">
-              Your vote is anonymous and confidential. Integrate your own vote
-              logic and eligibility checks here.
-            </p>
-          </div>
-        </div>
-      </div>
-
-      {/* Candidates */}
-      <VoteCandidate candidates={candidates} contestant={contestant} pollId={pollsId} voteId={voteId}  />
+      <VoteCandidate
+        candidates={candidates}
+        contestant={contestant}
+        pollId={pollsId}
+        voteId={voteId}
+      />
     </main>
   );
 }

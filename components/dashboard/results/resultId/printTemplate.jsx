@@ -5,10 +5,6 @@ export default function PrintTemplate({ poll }) {
     day: "numeric",
   });
 
-  function getUserInfo(userId) {
-    return poll.voters.find((voter) => voter._id === userId);
-  }
-
   // Calculate statistics
   const totalParticipants = poll.voters ? poll.voters.length : 0;
   const totalVotesCast = poll.contestants
@@ -49,12 +45,12 @@ export default function PrintTemplate({ poll }) {
           body {
             font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
             background: white;
-            color: #1f2937;
+            color: #000000;
           }
 
           .print-header {
             text-align: center;
-            background: #1f2937;
+            background: #000000;
             color: white;
             padding: 40px 20px;
             margin-bottom: 40px;
@@ -64,7 +60,7 @@ export default function PrintTemplate({ poll }) {
 
           .print-header h1 {
             font-size: 32pt;
-            font-weight: 700;
+            font-weight: 500;
             margin-bottom: 15px;
             letter-spacing: -0.5px;
           }
@@ -73,6 +69,7 @@ export default function PrintTemplate({ poll }) {
             font-size: 12pt;
             opacity: 0.95;
             margin-bottom: 5px;
+            font-weight: 500;
           }
 
           .print-meta p {
@@ -92,21 +89,22 @@ export default function PrintTemplate({ poll }) {
           }
 
           th {
-            background: #374151;
+            background: #000000;
             color: white;
-            border: 1px solid #374151;
+            border: 1px solid #000000;
             padding: 14px 12px;
             text-align: left;
-            font-weight: 600;
+            font-weight: 500;
             font-size: 12pt;
             letter-spacing: 0.3px;
           }
 
           td {
-            border: 1px solid #e5e7eb;
+            border: 1px solid #d1d5db;
             padding: 12px 12px;
             font-size: 11pt;
-            color: #374151;
+            color: #000000;
+            font-weight: 500;
           }
 
           tbody tr:nth-child(odd) {
@@ -125,7 +123,7 @@ export default function PrintTemplate({ poll }) {
             page-break-inside: avoid;
             margin-bottom: 35px;
             padding: 0 0 20px 0;
-            border-bottom: 2px solid #e5e7eb;
+            border-bottom: 2px solid #000000;
           }
 
           .position-section:last-child {
@@ -134,10 +132,10 @@ export default function PrintTemplate({ poll }) {
 
           .position-title {
             font-size: 18pt;
-            font-weight: 700;
+            font-weight: 500;
             margin-bottom: 15px;
-            color: #1f2937;
-            border-left: 5px solid #6b7280;
+            color: #000000;
+            border-left: 5px solid #000000;
             padding-left: 15px;
             text-transform: capitalize;
             letter-spacing: 0.5px;
@@ -146,15 +144,16 @@ export default function PrintTemplate({ poll }) {
           .print-footer {
             margin-top: 50px;
             padding-top: 20px;
-            border-top: 2px solid #e5e7eb;
+            border-top: 2px solid #000000;
             font-size: 10pt;
             text-align: center;
-            color: #6b7280;
+            color: #000000;
+            font-weight: 500;
           }
 
           .print-summary {
-            background: #f3f4f6;
-            border: 2px solid #e5e7eb;
+            background: #f9fafb;
+            border: 2px solid #000000;
             border-radius: 8px;
             padding: 25px;
             margin-bottom: 40px;
@@ -173,23 +172,24 @@ export default function PrintTemplate({ poll }) {
 
           .summary-label {
             font-size: 10pt;
-            color: #6b7280;
+            color: #000000;
             text-transform: uppercase;
             letter-spacing: 0.5px;
             margin-bottom: 8px;
-            font-weight: 600;
+            font-weight: 500;
           }
 
           .summary-value {
             font-size: 24pt;
-            font-weight: 700;
-            color: #1f2937;
+            font-weight: 500;
+            color: #000000;
           }
 
           .summary-subtext {
             font-size: 9pt;
-            color: #9ca3af;
+            color: #000000;
             margin-top: 4px;
+            font-weight: 500;
           }
 
           .progress-bar {
@@ -276,7 +276,7 @@ export default function PrintTemplate({ poll }) {
 
                       return (
                         <tr key={candidate._id}>
-                          <td>{getUserInfo(candidate.userId)?.name}</td>
+                          <td>{candidate.name}</td>
                           <td style={{ textAlign: "center" }}>
                             {candidate.votes || 0}
                           </td>

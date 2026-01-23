@@ -11,7 +11,7 @@ export const GET = auth(async function GET(req, { params }) {
       { error: "Unauthorized Access" },
       {
         status: 400,
-      }
+      },
     );
   }
   const userId = req?.auth?.user?.id;
@@ -21,7 +21,7 @@ export const GET = auth(async function GET(req, { params }) {
       { error: "Poll ID is required" },
       {
         status: 400,
-      }
+      },
     );
   }
   try {
@@ -37,12 +37,12 @@ export const GET = auth(async function GET(req, { params }) {
         { error: "Poll not found" },
         {
           status: 404,
-        }
+        },
       );
     }
 
     const userExist = poll?.voters.find(
-      (v) => v._id.toString() === userId.toString()
+      (v) => v._id.toString() === userId.toString(),
     );
 
     if (!userExist) {
@@ -50,15 +50,19 @@ export const GET = auth(async function GET(req, { params }) {
         { error: "User Does not belong to this board" },
         {
           status: 400,
-        }
+        },
       );
     }
 
+    if (new Date(poll?.endDate) < new Date()) {
+      poll.status = "Closed";
+      await poll.save();
+    }
     return NextResponse.json(
       { poll: poll },
       {
         status: 200,
-      }
+      },
     );
   } catch (err) {
     console.log(err);
@@ -66,7 +70,7 @@ export const GET = auth(async function GET(req, { params }) {
       { error: "Unable to get Poll" },
       {
         status: 400,
-      }
+      },
     );
   }
 });

@@ -2,7 +2,6 @@ import LoadingSpinner from "@/components/loadingspinner";
 import { CheckCircle, Trash2 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import VotersAddButton from "./votersaddbutton";
 
 export default function VotersTab({ poll, pollId, user }) {
   const [voters, setVoters] = useState([]);
@@ -72,7 +71,6 @@ export default function VotersTab({ poll, pollId, user }) {
         <h2 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white">
           Manage Voters
         </h2>
-        <VotersAddButton pollId={pollId} />
       </div>
 
       <div className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-200 dark:border-slate-700 overflow-hidden">

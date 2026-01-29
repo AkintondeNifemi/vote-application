@@ -47,7 +47,7 @@ export default function SideBar({
           <div className="flex  items-center justify-center rounded-lg  shrink-0">
             <img
               src="/logo-only.png"
-              className="h-12 w-12 rounded-2xl"
+              className="h-12 w-12 rounded-full"
               alt="logo"
             />
           </div>

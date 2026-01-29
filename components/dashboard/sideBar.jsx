@@ -6,6 +6,7 @@ import {
   FileText,
   PlusCircle,
 } from "lucide-react";
+import { signOut } from "next-auth/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -113,6 +114,9 @@ export default function SideBar({
               sidebarCollapsed ? "lg:justify-center" : ""
             }`}
             title={sidebarCollapsed ? "Logout" : ""}
+            onClick={() => {
+              signOut({ redirect: true, callbackUrl: "/" });
+            }}
           >
             <LogOut className="h-5 w-5 shrink-0" />
             <span className={sidebarCollapsed ? "lg:hidden" : ""}>Logout</span>

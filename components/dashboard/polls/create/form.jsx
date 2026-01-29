@@ -65,7 +65,7 @@ export default function CreatePollForm() {
     // one-hour difference before a voting session start
     if (new Date(startDate) - new Date() < 60 * 60 * 1000) {
       return toast.error(
-        "There should be one hour difference before the election can start"
+        "There should be one hour difference before the election can start",
       );
     }
 
@@ -127,7 +127,7 @@ export default function CreatePollForm() {
   const handleCopyLink = async () => {
     try {
       await navigator.clipboard.writeText(
-        shareLink || `${window.location.origin}${redirectUrl}`
+        shareLink || `${window.location.origin}${redirectUrl}`,
       );
       toast.success("Link copied to clipboard");
     } catch (error) {
@@ -336,7 +336,7 @@ export function ShareOverLay({
             <button
               type="button"
               onClick={handleCopyLink}
-              className="h-10 w-10 rounded-xl bg-white dark:bg-slate-700 border border-gray-200 dark:border-slate-600 flex items-center justify-center text-gray-600 dark:text-slate-200 hover:text-blue-600 dark:hover:text-blue-400 hover:border-blue-300 dark:hover:border-blue-500 transition"
+              className="h-10 cursor-pointer w-10 rounded-xl bg-white dark:bg-slate-700 border border-gray-200 dark:border-slate-600 flex items-center justify-center text-gray-600 dark:text-slate-200 hover:text-blue-600 dark:hover:text-blue-400 hover:border-blue-300 dark:hover:border-blue-500 transition"
             >
               <Copy className="h-5 w-5" />
             </button>
@@ -351,7 +351,7 @@ export function ShareOverLay({
                 {
                   label: "Facebook",
                   href: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
-                    shareLink || `${window.location.origin}${redirectUrl}`
+                    shareLink || `${window.location.origin}${redirectUrl}`,
                   )}`,
                   bg: "bg-blue-600",
                   icon: (
@@ -367,7 +367,7 @@ export function ShareOverLay({
                 {
                   label: "X",
                   href: `https://twitter.com/intent/tweet?url=${encodeURIComponent(
-                    shareLink || `${window.location.origin}${redirectUrl}`
+                    shareLink || `${window.location.origin}${redirectUrl}`,
                   )}`,
                   bg: "bg-black dark:bg-white",
                   textColor: "text-white dark:text-black",
@@ -384,7 +384,7 @@ export function ShareOverLay({
                 {
                   label: "Whatsapp",
                   href: `https://api.whatsapp.com/send?text=${encodeURIComponent(
-                    shareLink || `${window.location.origin}${redirectUrl}`
+                    shareLink || `${window.location.origin}${redirectUrl}`,
                   )}`,
                   bg: "bg-green-500",
                   icon: (
@@ -400,7 +400,7 @@ export function ShareOverLay({
                 {
                   label: "Telegram",
                   href: `https://t.me/share/url?url=${encodeURIComponent(
-                    shareLink || `${window.location.origin}${redirectUrl}`
+                    shareLink || `${window.location.origin}${redirectUrl}`,
                   )}`,
                   bg: "bg-sky-500",
                   icon: (
@@ -416,7 +416,7 @@ export function ShareOverLay({
                 {
                   label: "LinkedIn",
                   href: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(
-                    shareLink || `${window.location.origin}${redirectUrl}`
+                    shareLink || `${window.location.origin}${redirectUrl}`,
                   )}`,
                   bg: "bg-blue-700",
                   icon: (

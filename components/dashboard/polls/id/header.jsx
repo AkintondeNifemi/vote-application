@@ -1,4 +1,7 @@
-import { Users, UserPlus, CheckCircle, Clock } from "lucide-react";
+import { Users, UserPlus, CheckCircle, Clock, Share2 } from "lucide-react";
+import { useState } from "react";
+import { ShareOverLay } from "../create/form";
+import { toast } from "react-toastify";
 const formatDate = (dateString) => {
   const date = new Date(dateString);
   return date.toLocaleDateString("en-US", {
@@ -39,6 +42,7 @@ const getPollTimingStatus = (startDate, endDate) => {
     };
   }
 };
+
 export default function PollsIdHeader({ pollData }) {
   const {
     title,
@@ -50,8 +54,9 @@ export default function PollsIdHeader({ pollData }) {
     completedVoters,
     startDate,
     endDate,
+    _id,
   } = pollData;
-
+  const [overlay, setOverlay] = useState(false);
   const timingStatus = getPollTimingStatus(startDate, endDate);
 
   function calculateCandidate(contestants) {
@@ -65,11 +70,21 @@ export default function PollsIdHeader({ pollData }) {
     return totalCandidate;
   }
 
+  const handleCopyLink = async () => {
+    try {
+      await navigator.clipboard.writeText(
+        `${window.location.origin}/polls/invite/${pollData?._id}`,
+      );
+      toast.success("Link copied to clipboard");
+    } catch (error) {
+      toast.error("Unable to copy link");
+    }
+  };
   return (
     <div className="bg-linear-to-r from-slate-50 to-blue-50 dark:from-slate-900 dark:to-slate-800 border-b border-gray-200 dark:border-slate-700 px-4 sm:px-6 py-6 sm:py-8">
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col sm:flex-row items-start justify-between gap-4 mb-4">
-          <div>
+          <div className="flex-1">
             <div className="flex items-center gap-3 mb-3">
               <span
                 className={`inline-block px-3 py-1 rounded-full text-xs font-bold ${
@@ -91,6 +106,14 @@ export default function PollsIdHeader({ pollData }) {
               {description}
             </p>
           </div>
+
+          <button
+            onClick={() => setOverlay(true)}
+            className="inline-flex items-center gap-2 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-600 text-white rounded-lg font-semibold text-sm transition-colors shadow-sm"
+          >
+            <Share2 className="h-4 w-4" />
+            Share Poll
+          </button>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-6">
@@ -177,6 +200,14 @@ export default function PollsIdHeader({ pollData }) {
           </div>
         </div>
       </div>
+      {overlay && (
+        <ShareOverLay
+          handleCloseModal={() => setOverlay(false)}
+          handleCopyLink={handleCopyLink}
+          redirectUrl={`/polls/invite/${pollData?._id}`}
+          shareLink={`${window.location.origin}/polls/invite/${pollData?._id}`}
+        />
+      )}
     </div>
   );
 }

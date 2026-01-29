@@ -23,11 +23,8 @@ const formatDate = (dateString) => {
 export default function SettingsTab({ pollData, user }) {
   const creator = pollData?.userId;
   const creatorRole = pollData?.role?.find(
-    (r) => r.userId?.toString() === creator?._id?.toString()
+    (r) => r.userId?.toString() === creator?._id?.toString(),
   );
-  const votesCount = pollData?.voters?.length || 0;
-  const positionsCount = pollData?.contestants?.length || 0;
-  const completedVotes = pollData?.completedVoters?.length || 0;
 
   return (
     <div className="space-y-6">

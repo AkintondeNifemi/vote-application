@@ -1,9 +1,14 @@
 import PollsCard from "@/components/dashboard/polls/pollsCard";
 import { BASE_URL } from "@/libs/config/configuration";
-import { Clock, Users, ArrowRight } from "lucide-react";
+import { Clock, ArrowRight } from "lucide-react";
 import { cookies } from "next/headers";
 import Link from "next/link";
 import { redirect } from "next/navigation";
+
+export const metadata = {
+  title: "Joined Polls",
+  description: "Participate and vote on decisions that matter",
+};
 
 export default async function Page() {
   const request = await fetch(`${BASE_URL}/api/polls`, {

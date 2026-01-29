@@ -2,8 +2,29 @@
 
 export default function Loading() {
   return (
-    <div className="flex items-center justify-center h-full w-full">
-      <div className="loader"></div>
+    <div className="flex items-center justify-center min-h-screen w-full bg-white dark:bg-slate-900">
+      <div className="flex flex-col items-center gap-6">
+        <div className="loader"></div>
+        <div className="text-center">
+          <p className="text-sm font-semibold text-gray-900 dark:text-white">
+            Loading
+          </p>
+          <div className="flex gap-1.5 justify-center pt-3">
+            <div
+              className="h-2 w-2 bg-indigo-600 dark:bg-indigo-400 rounded-full animate-bounce"
+              style={{ animationDelay: "0ms" }}
+            ></div>
+            <div
+              className="h-2 w-2 bg-indigo-600 dark:bg-indigo-400 rounded-full animate-bounce"
+              style={{ animationDelay: "150ms" }}
+            ></div>
+            <div
+              className="h-2 w-2 bg-indigo-600 dark:bg-indigo-400 rounded-full animate-bounce"
+              style={{ animationDelay: "300ms" }}
+            ></div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

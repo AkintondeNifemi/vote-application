@@ -7,7 +7,6 @@ import { redirect } from "next/navigation";
 export default async function Layout({ children }) {
   const session = await auth();
   if (!session?.user && !session) return redirect("/");
-  console.log(session);
 
   // this line of code is optional
   // setInterval(async () => {

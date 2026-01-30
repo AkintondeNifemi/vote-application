@@ -1,16 +1,69 @@
 import { useState } from "react";
 import { UserPlus, Upload, X } from "lucide-react";
+import * as XLSX from "xlsx";
+
 export default function AddVoters() {
   const [showAddModal, setShowAddModal] = useState(false);
   const [newVoterEmail, setNewVoterEmail] = useState("");
   const [uploadedFile, setUploadedFile] = useState(null);
   const [dragActive, setDragActive] = useState(false);
+  const [parsedData, setParsedData] = useState(null);
+
+  const processFile = (file) => {
+    console.log("Processing file:", file.name, file.size, file.type);
+
+    if (file.type === "text/csv") {
+      // Handle CSV file
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        try {
+          const csv = e.target.result;
+          const lines = csv.split("\n").filter((line) => line.trim());
+          const headers = lines[0].split(",").map((h) => h.trim());
+          const data = lines.slice(1).map((line) => {
+            const values = line.split(",").map((v) => v.trim());
+            const row = {};
+            headers.forEach((header, index) => {
+              row[header] = values[index];
+            });
+            return row;
+          });
+          console.log("CSV Data:", data);
+          setParsedData(data);
+        } catch (error) {
+          console.error("Error parsing CSV:", error);
+        }
+      };
+      reader.readAsText(file);
+    } else if (
+      file.type ===
+      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+    ) {
+      // Handle Excel file
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        try {
+          const data = new Uint8Array(e.target.result);
+          const workbook = XLSX.read(data, { type: "array" });
+          const firstSheet = workbook.Sheets[workbook.SheetNames[0]];
+          const jsonData = XLSX.utils.sheet_to_json(firstSheet);
+          console.log("Excel Data:", jsonData);
+          setParsedData(jsonData);
+        } catch (error) {
+          console.error("Error parsing Excel:", error);
+        }
+      };
+      reader.readAsArrayBuffer(file);
+    } else {
+      console.warn("Unsupported file type");
+    }
+  };
 
   const handleFileChange = (e) => {
     const file = e.target.files?.[0];
-
     if (file) {
       setUploadedFile(file);
+      processFile(file);
     }
   };
 
@@ -31,17 +84,20 @@ export default function AddVoters() {
     const file = e.dataTransfer.files?.[0];
     if (file) {
       setUploadedFile(file);
+      processFile(file);
     }
   };
 
   const removeFile = () => {
     setUploadedFile(null);
+    setParsedData(null);
   };
 
   const resetModal = () => {
     setShowAddModal(false);
     setNewVoterEmail("");
     setUploadedFile(null);
+    setParsedData(null);
   };
   return (
     <>

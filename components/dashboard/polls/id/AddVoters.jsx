@@ -8,6 +8,7 @@ export default function AddVoters() {
 
   const handleFileChange = (e) => {
     const file = e.target.files?.[0];
+
     if (file) {
       setUploadedFile(file);
     }
@@ -152,11 +153,7 @@ export default function AddVoters() {
             </div>
             <div className="p-6 border-t border-gray-200 dark:border-slate-700 flex gap-3 justify-end">
               <button
-                onClick={() => {
-                  setShowAddModal(false);
-                  setNewVoterEmail("");
-                  setUploadedFile(null);
-                }}
+                onClick={resetModal}
                 className="px-4 cursor-pointer py-2 border border-gray-300 dark:border-slate-600 text-gray-700 dark:text-slate-300 rounded-lg hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors font-semibold"
               >
                 Cancel

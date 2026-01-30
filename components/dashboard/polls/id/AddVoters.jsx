@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { UserPlus, Upload, X } from "lucide-react";
 import Papa from "papaparse";
+import { toast } from "react-toastify";
 
 export default function AddVoters() {
   const [showAddModal, setShowAddModal] = useState(false);
@@ -22,7 +23,7 @@ export default function AddVoters() {
           setParsedData(results.data);
         },
         error: (error) => {
-          console.error("Error parsing CSV:", error);
+          toast.error("Error parsing CSV:", error);
         },
       });
     } else if (
@@ -42,19 +43,12 @@ export default function AddVoters() {
           }
           const base64 = btoa(binaryString);
 
-          // Parse Excel using a simple fetch to backend or use alternative method
-          // For now, we'll display a message that Excel needs to be converted
-          console.log(
-            "Excel file detected. Please convert to CSV format for best results.",
-          );
           console.log("File ready for processing:", {
             name: file.name,
             size: file.size,
           });
 
-          // You can send this to your backend API to parse
-          // For frontend-only: suggest converting Excel to CSV
-          alert(
+          toast.error(
             "Excel files work best when converted to CSV format. Please convert and upload again.",
           );
           setParsedData(null);
@@ -140,7 +134,7 @@ export default function AddVoters() {
               </div>
               <div className="border-t border-gray-200 dark:border-slate-700 pt-4">
                 <label className="block text-sm font-semibold text-gray-700 dark:text-slate-300 mb-2">
-                  Upload CSV/ Excel File (Optional)
+                  Upload CSV(Optional)
                 </label>
                 <div
                   onDragEnter={handleDrag}
@@ -201,7 +195,7 @@ export default function AddVoters() {
                           </p>
                         </div>
                         <p className="text-xs text-gray-500 dark:text-slate-400 mt-1">
-                          CSV, XLSX
+                          CSV
                         </p>
                       </div>
                     </label>

@@ -115,7 +115,7 @@ export default function Home() {
               },
               {
                 q: "How many people can vote?",
-                a: "For now, each poll can accommodate up to 10,000 voters. We're working on increasing this limit in future updates.",
+                a: "Each poll can accommodate up to 10,000 voters. We're working on increasing this limit in future updates.",
               },
             ].map((item, idx) => (
               <details
